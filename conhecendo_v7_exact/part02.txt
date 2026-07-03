@@ -1,0 +1,82 @@
+r-color:#047857}.branch-legend .c4{background:#eff6ff;border-color:#1d4ed8}.branch-legend .c5{background:#fffbeb;border-color:#b45309}.branch-legend .c6{background:#f5f3ff;border-color:#7c3aed}
+
+/* v5b: ajuste cirúrgico das DFs, mantendo a base visual da v4 */
+.df-zone{position:absolute;z-index:0;border:1.4px dashed #f59e0b;background:rgba(255,251,235,.42);border-radius:12px;pointer-events:none;}
+.df-zone span{position:absolute;left:12px;top:-22px;background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;border-radius:999px;padding:4px 9px;font-size:11px;font-weight:900;box-shadow:0 4px 12px rgba(15,23,42,.08);}
+.org-node.df-low{font-size:10.5px;line-height:1.05;}
+.org-node.df-low .tip{top:auto;bottom:calc(100% + 9px);}
+
+</style>
+</head>
+<body>
+<header class="header">
+<div class="nav">
+<div class="brand"><img alt="TCESP" class="logo" src="https://www.tce.sp.gov.br/sites/default/files/portal/logo_branco_300x100.png"/><div><h1>Conhecendo o Tribunal</h1><p>Organograma interativo do TCESP — arraste, aproxime e explore as unidades</p></div></div>
+<div class="actions">
+<input class="searchbox" id="search" placeholder="Buscar unidade: DTI, UR-11, DF-1..."/>
+<button class="primary" id="handBtn" title="Modo mão: arraste o organograma em qualquer direção">✋ Mão ativa</button>
+<button onclick="zoomStep(.1)" title="Aumentar zoom">+</button>
+<button onclick="zoomStep(-.1)" title="Diminuir zoom">−</button>
+<button onclick="setZoom(1)">100%</button>
+<button onclick="setZoom(.85)">85%</button>
+<button onclick="setZoom(.7)">70%</button>
+<a href="https://www.tce.sp.gov.br/organograma" rel="noopener" target="_blank">Organograma</a>
+<a href="https://www.tce.sp.gov.br/enderecos" rel="noopener" target="_blank">Diretores</a>
+<a href="https://www.tce.sp.gov.br/transparencia-tcesp/gestao-pessoas/quadro-pessoal" rel="noopener" target="_blank">Quadro de pessoal</a>
+</div>
+</div>
+</header>
+<div class="wrap">
+<div class="branch-legend"><span><i class="c1"></i>Direção</span><span><i class="c2"></i>Gabinetes</span><span><i class="c3"></i>Administração</span><span><i class="c4"></i>Tecnologia</span><span><i class="c5"></i>Fiscalização</span><span><i class="c6"></i>URs</span></div>
+<div class="canvas-shell" id="shell"><div class="canvas" id="canvas">
+<svg class="lines" preserveaspectratio="none" viewbox="0 0 2080 1460">
+<rect class="dash-red" height="330" rx="0" width="1670" x="285" y="18"></rect>
+<rect class="dash-red" height="72" rx="0" width="1670" x="285" y="90"></rect>
+<rect class="dash-red" height="190" rx="0" width="600" x="785" y="160"></rect>
+<rect class="dash-red" height="270" rx="0" width="1460" x="565" y="350"></rect>
+<path d="M950.0,42.0 V50.0 H970.0 V58.0"></path>
+<path d="M970.0,88.0 V94.0 H530.0 V100.0"></path>
+<path d="M970.0,88.0 V94.0 H1535.0 V100.0"></path>
+<path d="M530.0,132.0 V141.0 H386.0 V150.0"></path>
+<path d="M386.0,198.0 V206.5 H386.0 V215.0"></path>
+<path d="M530.0,132.0 V141.0 H511.0 V150.0"></path>
+<path d="M511.0,198.0 V206.5 H511.0 V215.0"></path>
+<path d="M530.0,132.0 V141.0 H636.0 V150.0"></path>
+<path d="M636.0,198.0 V206.5 H636.0 V215.0"></path>
+<path d="M530.0,132.0 V171.0 H281.0 V210.0"></path>
+<path d="M970.0,88.0 V119.0 H778.0 V150.0"></path>
+<path d="M970.0,88.0 V119.0 H907.0 V150.0"></path>
+<path d="M970.0,88.0 V119.0 H1064.0 V150.0"></path>
+<path d="M778.0,192.0 V208.5 H806.0 V225.0"></path>
+<path d="M806.0,259.0 V277.0 H537.5 V295.0"></path>
+<path d="M806.0,259.0 V277.0 H602.5 V295.0"></path>
+<path d="M806.0,259.0 V277.0 H667.5 V295.0"></path>
+<path d="M806.0,259.0 V277.0 H732.5 V295.0"></path>
+<path d="M806.0,259.0 V277.0 H797.5 V295.0"></path>
+<path d="M806.0,259.0 V277.0 H876.0 V295.0"></path>
+<path d="M1064.0,198.0 V201.5 H1005.0 V205.0"></path>
+<path d="M1064.0,198.0 V226.5 H1005.0 V255.0"></path>
+<path d="M1064.0,198.0 V251.5 H1005.0 V305.0"></path>
+<path d="M1064.0,198.0 V204.0 H1116.0 V210.0"></path>
+<path d="M1064.0,198.0 V226.5 H1116.0 V255.0"></path>
+<path d="M1064.0,198.0 V249.0 H1116.0 V300.0"></path>
+<path d="M970.0,88.0 V146.5 H1273.0 V205.0"></path>
+<path d="M1273.0,263.0 V276.5 H1276.0 V290.0"></path>
+<path d="M1535.0,132.0 V141.0 H1426.0 V150.0"></path>
+<path d="M1426.0,198.0 V241.5 H1426.0 V285.0"></path>
+<path d="M1535.0,132.0 V141.0 H1566.0 V150.0"></path>
+<path d="M1566.0,198.0 V241.5 H1566.0 V285.0"></path>
+<path d="M1535.0,132.0 V141.0 H1706.0 V150.0"></path>
+<path d="M1706.0,198.0 V241.5 H1706.0 V285.0"></path>
+<path d="M1535.0,132.0 V171.0 H1777.0 V210.0"></path>
+<path d="M970.0,88.0 V224.0 H130.0 V360.0"></path>
+<path d="M970.0,88.0 V224.0 H290.0 V360.0"></path>
+<path d="M970.0,88.0 V224.0 H490.0 V360.0"></path>
+<path d="M970.0,88.0 V229.0 H740.0 V370.0"></path>
+<path d="M970.0,88.0 V229.0 H880.0 V370.0"></path>
+<path d="M970.0,88.0 V239.0 H991.0 V390.0"></path>
+<path d="M970.0,88.0 V229.0 H1117.5 V370.0"></path>
+<path d="M970.0,88.0 V229.0 H1237.5 V370.0"></path>
+<path d="M970.0,88.0 V234.0 H1362.5 V380.0"></path>
+<path d="M970.0,88.0 V234.0 H1507.5 V380.0"></path>
+<
