@@ -1,0 +1,107 @@
+0px;width:90px;height:58px" tabindex="0">
+<span>Diretoria de
+Contratos e
+Projetos</span>
+<div class="tip"><b>Diretoria de
+Contratos e
+Projetos</b><p>Acompanha contratos, projetos e execução administrativa.</p></div>
+</div>
+<div class="org-node small" data-id="dcp1" style="left:768px;top:850px;width:70px;height:26px" tabindex="0">
+<span>DCP-1</span>
+<div class="tip"><b>DCP-1</b><p>Acompanha contratos, projetos e execução administrativa.</p></div>
+</div>
+<div class="org-node small" data-id="dcp2" style="left:768px;top:882px;width:70px;height:26px" tabindex="0">
+<span>DCP-2</span>
+<div class="tip"><b>DCP-2</b><p>Acompanha contratos, projetos e execução administrativa.</p></div>
+</div>
+<div class="org-node small" data-id="dcp3" style="left:768px;top:914px;width:70px;height:26px" tabindex="0">
+<span>DCP-3</span>
+<div class="tip"><b>DCP-3</b><p>Acompanha contratos, projetos e execução administrativa.</p></div>
+</div>
+<div class="org-node small" data-id="dcp4" style="left:768px;top:946px;width:70px;height:26px" tabindex="0">
+<span>DCP-4</span>
+<div class="tip"><b>DCP-4</b><p>Acompanha contratos, projetos e execução administrativa.</p></div>
+</div>
+<div class="org-node small" data-id="dcp5" style="left:768px;top:978px;width:70px;height:26px" tabindex="0">
+<span>DCP-5</span>
+<div class="tip"><b>DCP-5</b><p>Acompanha contratos, projetos e execução administrativa.</p></div>
+</div>
+<div class="org-node admin" data-id="dsas" style="left:880px;top:780px;width:105px;height:58px" tabindex="0">
+<span>Diretoria de Saúde
+e Assistência
+Social</span>
+<div class="tip"><b>Diretoria de Saúde
+e Assistência
+Social</b><p>Presta apoio médico, odontológico e assistencial aos servidores.</p></div>
+</div>
+<div class="org-node small" data-id="dsas0" style="left:895px;top:850px;width:82px;height:36px" tabindex="0">
+<span>Corpo
+Médico</span>
+<div class="tip"><b>Corpo
+Médico</b><p>Apoio médico aos servidores.</p></div>
+</div>
+<div class="org-node small" data-id="dsas1" style="left:895px;top:906px;width:82px;height:36px" tabindex="0">
+<span>Corpo
+Odontológico</span>
+<div class="tip"><b>Corpo
+Odontológico</b><p>Apoio odontológico aos servidores.</p></div>
+</div>
+<div class="org-node small" data-id="dsas2" style="left:895px;top:962px;width:82px;height:48px" tabindex="0">
+<span>Núcleo de
+Assistência
+Social</span>
+<div class="tip"><b>Núcleo de
+Assistência
+Social</b><p>Apoio social e orientação aos servidores.</p></div>
+</div>
+<div class="org-node small" data-id="dsas3" style="left:895px;top:1018px;width:82px;height:54px" tabindex="0">
+<span>Núcleo de
+Apoio Técnico
+à Saúde</span>
+<div class="tip"><b>Núcleo de
+Apoio Técnico
+à Saúde</b><p>Apoio técnico às demandas de saúde.</p></div>
+</div>
+<div class="org-node small" data-id="dsas4" style="left:895px;top:1074px;width:82px;height:54px" tabindex="0">
+<span>Núcleo de
+Apoio
+Administrativo</span>
+<div class="tip"><b>Núcleo de
+Apoio
+Administrativo</b><p>Apoio administrativo às rotinas da área.</p></div>
+</div>
+<div class="org-node fiscal" data-id="dsf1" style="left:1175px;top:730px;width:130px;height:60px" tabindex="0">
+<span>DSF-1
+Depto. Supervisão
+de Fiscalização 1</span>
+<div class="tip"><b>DSF-1
+Depto. Supervisão
+de Fiscalização 1</b><p>Supervisiona diretorias e equipes de fiscalização.</p><div class="meta"><strong>Diretor(a): </strong>Paulo Massaru Uesugi Sugiura</div></div>
+</div>
+<div class="org-node small" data-id="dsf11" style="left:1220px;top:800px;width:76px;height:28px" tabindex="0">
+<span>DSF-1.1</span>
+<div class="tip"><b>DSF-1.1</b><p>Supervisiona diretorias e equipes de fiscalização.</p></div>
+</div>
+<div class="org-node fiscal" data-id="dsf2" style="left:1600px;top:730px;width:130px;height:60px" tabindex="0">
+<span>DSF-2
+Depto. Supervisão
+de Fiscalização 2</span>
+<div class="tip"><b>DSF-2
+Depto. Supervisão
+de Fiscalização 2</b><p>Supervisiona diretorias e equipes de fiscalização.</p><div class="meta"><strong>Diretor(a): </strong>Alexandre Teixeira Carsola</div></div>
+</div>
+<div class="org-node small" data-id="dsf21" style="left:1700px;top:800px;width:76px;height:28px" tabindex="0">
+<span>DSF-2.1</span>
+<div class="tip"><b>DSF-2.1</b><p>Supervisiona diretorias e equipes de fiscalização.</p></div>
+</div>
+<div class="org-node regional" data-id="urA0" style="left:1110px;top:845px;width:70px;height:26px" tabindex="0">
+<span>UR-1</span>
+<div class="tip"><b>UR-1</b><p>Sede regional descentralizada de fiscalização e atendimento.</p><div class="meta"><strong>Diretor(a): </strong>Amanda Vieira Pinto da Silva</div></div>
+</div>
+<div class="org-node regional" data-id="urA1" style="left:1110px;top:877px;width:70px;height:26px" tabindex="0">
+<span>UR-3</span>
+<div class="tip"><b>UR-3</b><p>Sede regional descentralizada de fiscalização e atendimento.</p><div class="meta"><strong>Diretor(a): </strong>Ana Cristina Okumura</div></div>
+</div>
+<div class="org-node regional" data-id="urA2" style="left:1110px;top:909px;width:70px;height:26px" tabindex="0">
+<span>UR-6</span>
+<div class="tip"><b>UR-6</b><p>Sed
