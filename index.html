@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-<title>SP • Painel territorial TCESP — v10 DF/UR</title>
+<title>SP • Painel territorial TCESP — v10 DF/UR + Organograma</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css" />
 <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/Leaflet/Leaflet.heat/dist/leaflet-heat.js"></script>
@@ -121,6 +121,9 @@ body.presentation .panel, body.presentation .legend, body.presentation .sources,
 .primary-cta, .floating-info { border:0; border-radius:18px; font-weight:950; cursor:pointer; }
 .primary-cta { position:relative; display:inline-flex; align-items:center; gap:12px; background:linear-gradient(135deg,#0f172a,#1d4ed8); color:#fff; padding:18px 24px; min-height:60px; font-size:16px; box-shadow:0 20px 42px rgba(29,78,216,.30); transform:translateY(0); transition:.18s ease; }
 .primary-cta:hover { transform:translateY(-2px); box-shadow:0 26px 54px rgba(29,78,216,.38); } .primary-cta::after { content:'→'; width:26px; height:26px; border-radius:999px; display:grid; place-items:center; background:rgba(255,255,255,.16); }
+.landing-actions a.primary-cta { text-decoration:none; }
+.primary-cta.cta-alt { background:#fff; color:#0f172a; border:1px solid #cbd5e1; box-shadow:0 14px 28px rgba(15,23,42,.12); }
+.primary-cta.cta-alt::after { background:#eff6ff; color:#1d4ed8; }
 .cta-hint { margin:10px 0 0; color:#475569; font-size:12px; font-weight:750; }
 .landing-link-list { display:grid; grid-template-columns:1fr; gap:9px; margin-top:10px; }
 .landing-link { display:block; text-decoration:none; color:#0f172a; background:#fff; border:1px solid #dbe3ef; border-radius:16px; padding:12px 13px; transition:.16s ease; pointer-events:auto; }
@@ -173,8 +176,9 @@ body.presentation .panel, body.presentation .legend, body.presentation .sources,
       <div>
         <div class="landing-actions">
           <button id="startApp" class="primary-cta">Explorar mapa interativo</button>
+          <a class="primary-cta cta-alt" href="./conhecendo.html">Conhecendo o Tribunal</a>
         </div>
-        <div class="cta-hint">Abre o mapa com filtros por área fiscalizadora DF/UR, indicador e tabela territorial.</div>
+        <div class="cta-hint">Use o primeiro botão para abrir o mapa. Use “Conhecendo o Tribunal” para acessar o organograma interativo aprovado.</div>
         <div class="landing-footnote">Fontes consolidadas: TCESP, IBGE/Seade, IEG-M 2024/2025 e planilha de municípios por área fiscalizadora. Identificação visual: @daniel.castro.8.</div>
       </div>
     </div>
@@ -185,6 +189,7 @@ body.presentation .panel, body.presentation .legend, body.presentation .sources,
         <button class="landing-tab" data-lpane="lpMapa">Mapa</button>
         <button class="landing-tab" data-lpane="lpIegm">IEG-M</button>
         <button class="landing-tab" data-lpane="lpLinks">Links</button>
+        <a class="landing-tab" href="./conhecendo.html" style="text-decoration:none;display:inline-flex;align-items:center">Conhecendo o Tribunal</a>
       </div>
       <div id="lpProjeto" class="landing-pane active">
         <h2>Estrutura do painel</h2>
@@ -221,6 +226,7 @@ body.presentation .panel, body.presentation .legend, body.presentation .sources,
       <div id="lpLinks" class="landing-pane">
         <h2>Portais de consulta</h2>
         <div class="landing-link-list">
+          <a class="landing-link" href="./conhecendo.html"><b>Conhecendo o Tribunal</b><span>Organograma interativo do TCESP com navegação por mão, zoom e boxes explicativos.</span></a>
           <a class="landing-link" target="_blank" rel="noopener" href="https://www.tce.sp.gov.br/enderecos"><b>Endereços e unidades do TCESP</b><span>Sede, unidades regionais, endereços e contatos institucionais.</span></a>
           <a class="landing-link" target="_blank" rel="noopener" href="https://www.tce.sp.gov.br/orgaos-fiscalizados"><b>Órgãos Fiscalizados</b><span>Relação oficial de jurisdicionados e respectivas unidades fiscalizadoras.</span></a>
           <a class="landing-link" target="_blank" rel="noopener" href="https://transparencia.tce.sp.gov.br/"><b>Transparência Municipal TCESP</b><span>Receitas, despesas, fornecedores e arquivos municipais.</span></a>
