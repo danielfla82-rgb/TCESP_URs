@@ -1,0 +1,50 @@
+iscaliza contas, atos e gestão dos jurisdicionados de sua área.</p><div class="meta"><strong>Diretor(a): </strong>Roberta Azola Gardelli</div></div>
+</div>
+<div class="org-node fiscalSmall df-low" data-id="df101" style="left:1980px;top:1281px;width:86px;height:27px" tabindex="0">
+<span>DF-10.1</span>
+<div class="tip"><b>DF-10.1</b><p>Subunidade operacional da respectiva Diretoria de Fiscalização.</p></div>
+</div>
+<div class="org-node fiscalSmall df-low" data-id="df102" style="left:1980px;top:1314px;width:86px;height:27px" tabindex="0">
+<span>DF-10.2</span>
+<div class="tip"><b>DF-10.2</b><p>Subunidade operacional da respectiva Diretoria de Fiscalização.</p></div>
+</div>
+<div class="org-node fiscalSmall df-low" data-id="df103" style="left:1980px;top:1347px;width:86px;height:27px" tabindex="0">
+<span>DF-10.3</span>
+<div class="tip"><b>DF-10.3</b><p>Subunidade operacional da respectiva Diretoria de Fiscalização.</p></div>
+</div>
+<div class="org-node fiscalSmall df-low" data-id="df104" style="left:1980px;top:1380px;width:86px;height:27px" tabindex="0">
+<span>DF-10.4</span>
+<div class="tip"><b>DF-10.4</b><p>Subunidade operacional da respectiva Diretoria de Fiscalização.</p></div>
+</div>
+
+</div></div>
+</div>
+<div class="footer">Fontes: Organograma oficial do TCESP; página oficial de Endereços; página da AUDESP; Quadro de Pessoal do Portal da Transparência consultado para lotação por departamento. Projeto preparado por @daniel.castro.8.</div>
+<script>
+let z=1;
+const BASE_W=2080, BASE_H=1460;
+const shell=document.getElementById('shell');
+const canvas=document.getElementById('canvas');
+function clamp(n,min,max){ return Math.max(min, Math.min(max,n)); }
+function setZoom(v){
+  z=clamp(Number(v), .45, 1.6);
+  canvas.style.transform='scale('+z+')';
+  canvas.style.width=BASE_W+'px';
+  canvas.style.height=BASE_H+'px';
+  shell.style.setProperty('--z', z);
+}
+function zoomStep(delta){ setZoom((z+delta).toFixed(2)); }
+
+let dragging=false, pointerId=null, startX=0, startY=0, startLeft=0, startTop=0, moved=false;
+function beginPan(e){
+  if(e.button!==undefined && e.button!==0) return;
+  dragging=true; moved=false; pointerId=e.pointerId;
+  startX=e.clientX; startY=e.clientY;
+  startLeft=shell.scrollLeft; startTop=shell.scrollTop;
+  shell.classList.add('dragging');
+  try{ shell.setPointerCapture(pointerId); }catch(_e){}
+  e.preventDefault();
+}
+function movePan(e){
+  if(!dragging || (pointerId!==null && e.pointerId!==pointerId)) return;
+  const dx=e.clientX-startX, dy=e.clientY-st
