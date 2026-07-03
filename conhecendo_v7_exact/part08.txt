@@ -1,0 +1,98 @@
+div>
+<div class="org-node small" data-id="dirproc2" style="left:680px;top:570px;width:120px;height:48px" tabindex="0">
+<span>Apoio Técnico e
+Operacional</span>
+<div class="tip"><b>Apoio Técnico e
+Operacional</b><p>Presta suporte técnico e operacional à área.</p></div>
+</div>
+<div class="org-node small" data-id="dircom0" style="left:822px;top:445px;width:125px;height:70px" tabindex="0">
+<span>Comunicação,
+Reputação e
+Análise de
+Cenário</span>
+<div class="tip"><b>Comunicação,
+Reputação e
+Análise de
+Cenário</b><p>Acompanha comunicação, reputação institucional e análise de cenário.</p></div>
+</div>
+<div class="org-node small" data-id="dircom1" style="left:822px;top:535px;width:125px;height:54px" tabindex="0">
+<span>Conteúdo Digital
+e Mídias</span>
+<div class="tip"><b>Conteúdo Digital
+e Mídias</b><p>Produz conteúdo digital e materiais para mídias.</p></div>
+</div>
+<div class="org-node small" data-id="dircom2" style="left:822px;top:610px;width:125px;height:46px" tabindex="0">
+<span>Marca, Design e
+Identidade Visual</span>
+<div class="tip"><b>Marca, Design e
+Identidade Visual</b><p>Cuida de marca, design e identidade visual.</p></div>
+</div>
+<div class="org-node small" data-id="dce1" style="left:1082px;top:445px;width:70px;height:26px" tabindex="0">
+<span>DCE-1</span>
+<div class="tip"><b>DCE-1</b><p>Apoia planejamento, coordenação estratégica e monitoramento.</p></div>
+</div>
+<div class="org-node small" data-id="dce2" style="left:1082px;top:485px;width:70px;height:26px" tabindex="0">
+<span>DCE-2</span>
+<div class="tip"><b>DCE-2</b><p>Apoia planejamento, coordenação estratégica e monitoramento.</p></div>
+</div>
+<div class="org-node small" data-id="dep0" style="left:1188px;top:440px;width:100px;height:38px" tabindex="0">
+<span>Célula de Apoio</span>
+<div class="tip"><b>Célula de Apoio</b><p>Apoio direto às rotinas da diretoria.</p></div>
+</div>
+<div class="org-node small" data-id="dep1" style="left:1188px;top:485px;width:100px;height:38px" tabindex="0">
+<span>Corpo Técnico</span>
+<div class="tip"><b>Corpo Técnico</b><p>Presta análise e suporte técnico à unidade.</p></div>
+</div>
+<div class="org-node small" data-id="dep2" style="left:1188px;top:530px;width:100px;height:38px" tabindex="0">
+<span>Suporte
+Administrativo</span>
+<div class="tip"><b>Suporte
+Administrativo</b><p>Apoia demandas administrativas da unidade.</p></div>
+</div>
+<div class="org-node small" data-id="dep3" style="left:1188px;top:585px;width:100px;height:38px" tabindex="0">
+<span>Análise
+Processual</span>
+<div class="tip"><b>Análise
+Processual</b><p>Realiza apoio à triagem e análise de processos.</p></div>
+</div>
+<div class="org-node small" data-id="ouvid0" style="left:1325px;top:455px;width:92px;height:34px" tabindex="0">
+<span>SIC</span>
+<div class="tip"><b>SIC</b><p>Atende pedidos de acesso à informação.</p></div>
+</div>
+<div class="org-node small" data-id="ouvid1" style="left:1325px;top:500px;width:92px;height:34px" tabindex="0">
+<span>Ouvidoria das
+Mulheres</span>
+<div class="tip"><b>Ouvidoria das
+Mulheres</b><p>Canal especializado de acolhimento e encaminhamento.</p></div>
+</div>
+<div class="org-node small" data-id="ouvid2" style="left:1325px;top:560px;width:92px;height:34px" tabindex="0">
+<span>Expediente</span>
+<div class="tip"><b>Expediente</b><p>Organiza documentação, registros e rotinas de expediente.</p></div>
+</div>
+<div class="org-node small" data-id="sdgsub0" style="left:1510px;top:455px;width:105px;height:28px" tabindex="0">
+<span>Taquigrafia</span>
+<div class="tip"><b>Taquigrafia</b><p>Registra sessões, reuniões e atos oficiais.</p></div>
+</div>
+<div class="org-node small" data-id="sdgsub1" style="left:1510px;top:500px;width:105px;height:28px" tabindex="0">
+<span>Pauta</span>
+<div class="tip"><b>Pauta</b><p>Organiza pautas de julgamento e sessões.</p></div>
+</div>
+<div class="org-node small" data-id="sdgsub2" style="left:1510px;top:545px;width:105px;height:28px" tabindex="0">
+<span>Jurisprudência</span>
+<div class="tip"><b>Jurisprudência</b><p>Organiza decisões, entendimentos e pesquisa jurisprudencial.</p></div>
+</div>
+<div class="org-node small" data-id="dipe" style="left:1665px;top:450px;width:72px;height:30px" tabindex="0">
+<span>DIPE</span>
+<div class="tip"><b>DIPE</b><p>Apoia informações processuais, expedientes e tramitação eletrônica.</p></div>
+</div>
+<div class="org-node small" data-id="dipe1" style="left:1665px;top:490px;width:72px;height:26px" tabindex="0">
+<span>DIPE-1</span>
+<div class="tip"><b>DIPE-1</b><p>Apoia informações processuais, expedientes e tramitação eletrônica.</p></div>
+</div>
+<div class="org-node small" data-id="dipe2" style="left:1665px;top:522px;width:72px;height:26px" tabindex="0">
+<span>DIPE-2</span>
+<div class="tip"><b>DIPE-2</b><p>Apoia informações processuais, expedientes e tramitação eletrônica.</p></div>
+</div>
+<div class="org-node small" data-id="dipe3" style="left:1665px;top:554px;width:72px;height:26px" tabindex="0">
+<span>DIPE-3</span>
+<div class="tip"><b>DIPE-3</b><p>Apoia informações processu
