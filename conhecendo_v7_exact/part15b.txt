@@ -1,0 +1,39 @@
+80px;top:1281px;width:82px;height:27px" tabindex="0">
+<span>DF-4.1</span>
+<div class="tip"><b>DF-4.1</b><p>Subunidade operacional da respectiva Diretoria de Fiscalização.</p></div>
+</div>
+<div class="org-node fiscalSmall df-low" data-id="df42" style="left:1780px;top:1314px;width:82px;height:27px" tabindex="0">
+<span>DF-4.2</span>
+<div class="tip"><b>DF-4.2</b><p>Subunidade operacional da respectiva Diretoria de Fiscalização.</p></div>
+</div>
+<div class="org-node fiscalSmall df-low" data-id="df43" style="left:1780px;top:1347px;width:82px;height:27px" tabindex="0">
+<span>DF-4.3</span>
+<div class="tip"><b>DF-4.3</b><p>Subunidade operacional da respectiva Diretoria de Fiscalização.</p></div>
+</div>
+<div class="org-node fiscalSmall df-low" data-id="df44" style="left:1780px;top:1380px;width:82px;height:27px" tabindex="0">
+<span>DF-4.4</span>
+<div class="tip"><b>DF-4.4</b><p>Subunidade operacional da respectiva Diretoria de Fiscalização.</p></div>
+</div>
+<div class="org-node fiscalSmall df-low" data-id="df70" style="left:1880px;top:1248px;width:82px;height:27px" tabindex="0">
+<span>DF-7</span>
+<div class="tip"><b>DF-7</b><p>Fiscaliza contas, atos e gestão dos jurisdicionados de sua área.</p><div class="meta"><strong>Diretor(a): </strong>Elias Santos Ferreira</div></div>
+</div>
+<div class="org-node fiscalSmall df-low" data-id="df71" style="left:1880px;top:1281px;width:82px;height:27px" tabindex="0">
+<span>DF-7.1</span>
+<div class="tip"><b>DF-7.1</b><p>Subunidade operacional da respectiva Diretoria de Fiscalização.</p></div>
+</div>
+<div class="org-node fiscalSmall df-low" data-id="df72" style="left:1880px;top:1314px;width:82px;height:27px" tabindex="0">
+<span>DF-7.2</span>
+<div class="tip"><b>DF-7.2</b><p>Subunidade operacional da respectiva Diretoria de Fiscalização.</p></div>
+</div>
+<div class="org-node fiscalSmall df-low" data-id="df73" style="left:1880px;top:1347px;width:82px;height:27px" tabindex="0">
+<span>DF-7.3</span>
+<div class="tip"><b>DF-7.3</b><p>Subunidade operacional da respectiva Diretoria de Fiscalização.</p></div>
+</div>
+<div class="org-node fiscalSmall df-low" data-id="df74" style="left:1880px;top:1380px;width:82px;height:27px" tabindex="0">
+<span>DF-7.4</span>
+<div class="tip"><b>DF-7.4</b><p>Subunidade operacional da respectiva Diretoria de Fiscalização.</p></div>
+</div>
+<div class="org-node fiscalSmall df-low" data-id="df100" style="left:1980px;top:1248px;width:86px;height:27px" tabindex="0">
+<span>DF-10</span>
+<div class="tip"><b>DF-10</b><p>F
