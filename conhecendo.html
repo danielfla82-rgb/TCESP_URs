@@ -1,0 +1,1437 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>Conhecendo o Tribunal — Organograma Interativo TCESP v7 — DFs sem linhas soltas</title>
+<style>
+:root{--ink:#0f172a;--muted:#64748b;--line:#cbd5e1;--blue:#1d4ed8;--red:#ef4444;--paper:#ffffff;--bg:#f1f5f9;}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,Arial,Helvetica,sans-serif;background:linear-gradient(135deg,#f8fafc,#e2e8f0);color:var(--ink);overflow:hidden;}
+.header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);border-bottom:1px solid #dbe3ef;}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 18px;}
+.brand{display:flex;align-items:center;gap:12px;min-width:300px}
+.logo{height:42px;background:#0f172a;border-radius:10px;padding:5px;object-fit:contain}
+.brand h1{margin:0;font-size:17px;letter-spacing:-.02em}
+.brand p{margin:2px 0 0;color:#64748b;font-size:12px}
+.actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.actions a,.actions button{border:1px solid #cbd5e1;background:#fff;border-radius:999px;padding:8px 11px;color:#334155;text-decoration:none;font-weight:800;font-size:12px;cursor:pointer}
+.actions button.primary{background:#1d4ed8;color:#fff;border-color:#1d4ed8}
+.wrap{padding:12px 18px 16px;}
+.canvas-shell{max-width:100%;height:calc(100vh - 118px);overflow:auto;border:1px solid #cbd5e1;border-radius:24px;background:#fff;box-shadow:0 24px 60px rgba(15,23,42,.14);position:relative;overscroll-behavior:contain;scrollbar-gutter:stable;}
+.canvas{position:relative;width:2080px;height:1460px;background:#fff;transform-origin:top left;}
+svg.lines{position:absolute;inset:0;width:2080px;height:1460px;z-index:1;pointer-events:none;}
+svg.lines path{fill:none;stroke:#111827;stroke-width:1.2;shape-rendering:crispEdges;}
+svg.lines .dash-red{fill:none;stroke:#ef4444;stroke-width:1.2;stroke-dasharray:7 6;opacity:.75}
+svg.lines .df-wire{fill:none;stroke:#b45309;stroke-width:1.6;stroke-linecap:square;stroke-linejoin:miter;opacity:.9}
+.org-node{position:absolute;z-index:2;border:1.2px solid #111827;background:#fff;color:#111827;display:flex;align-items:center;justify-content:center;text-align:center;padding:3px 5px;font-size:11px;line-height:1.05;box-shadow:0 1px 0 rgba(15,23,42,.06);cursor:help;transition:transform .12s ease, box-shadow .12s ease, border-color .12s ease, background .12s ease;}
+.org-node:hover,.org-node:focus{transform:translateY(-2px);border-color:#1d4ed8;background:#eff6ff;box-shadow:0 10px 28px rgba(29,78,216,.16);z-index:30;outline:0;}
+.org-node.top{font-size:20px;font-weight:900;height:34px;background:#f8fafc}
+.org-node.top2,.org-node.chamber{font-weight:800;background:#f8fafc}
+.org-node.dashed{border-style:dashed;background:#fff}
+.org-node.admin{background:#f8fafc;border-color:#334155}
+.org-node.tech{background:#f0f9ff;border-color:#0369a1}
+.org-node.fiscal{background:#fff7ed;border-color:#9a3412}
+.org-node.fiscalSmall{background:#fffbeb;border-color:#9a3412}
+.org-node.regional{background:#f5f3ff;border-color:#6d28d9}
+.org-node.external{background:#fef2f2;border-color:#991b1b}
+.org-node.small{font-size:10px;background:#fff}
+.tip{display:none;position:absolute;left:50%;top:calc(100% + 9px);transform:translateX(-50%);width:320px;text-align:left;background:#0f172a;color:#fff;border-radius:16px;padding:12px;box-shadow:0 24px 60px rgba(15,23,42,.34);font-size:12px;line-height:1.42;pointer-events:none;}
+.org-node:hover .tip,.org-node:focus .tip{display:block}
+.tip b{display:block;font-size:13px;color:#dbeafe;margin-bottom:6px}
+.tip p{margin:6px 0;color:#f8fafc}
+.tip small{display:block;color:#cbd5e1;margin-top:8px;font-size:10.5px}
+.footer{padding:10px 18px 20px;color:#64748b;font-size:12px;line-height:1.45}
+.searchbox{height:36px;border:1px solid #cbd5e1;border-radius:999px;padding:0 12px;width:220px;font-size:12px}
+.dim .org-node{opacity:.22}
+.org-node.hit{opacity:1!important;background:#dcfce7!important;border-color:#16a34a!important;box-shadow:0 0 0 3px rgba(22,163,74,.18)}
+@media(max-width:900px){.nav{align-items:flex-start;flex-direction:column}.brand{min-width:0}.notice{flex-direction:column}}
+
+.canvas-shell{cursor:grab; user-select:none; touch-action:none;}
+.canvas-shell.dragging{cursor:grabbing;}
+.canvas-shell.dragging .org-node{pointer-events:none;}
+.actions button#handBtn{background:#0f172a;color:#fff;border-color:#0f172a}
+.org-node{border-radius:3px;}
+.org-node.top{background:#e0f2fe;border-color:#0369a1;color:#0f172a}
+.org-node.top2{background:#dbeafe;border-color:#1d4ed8}
+.org-node.chamber{background:#eef2ff;border-color:#4338ca}
+.org-node.judicial{background:#fff7ed;border-color:#c2410c}
+.org-node.dashed{background:#faf5ff;border-color:#7e22ce}
+.org-node.external{background:#fef2f2;border-color:#991b1b}
+.org-node.admin{background:#ecfdf5;border-color:#047857}
+.org-node.tech{background:#eff6ff;border-color:#1d4ed8}
+.org-node.fiscal{background:#fffbeb;border-color:#b45309}
+.org-node.fiscalSmall{background:#fff7ed;border-color:#ea580c}
+.org-node.regional{background:#f5f3ff;border-color:#7c3aed}
+.org-node.small{background:#ffffff;border-color:#64748b}
+.tip{width:330px;}
+.tip .meta{margin-top:7px;padding-top:7px;border-top:1px solid rgba(255,255,255,.16);font-size:11px;color:#e5e7eb}
+.tip .meta strong{color:#bfdbfe}
+.branch-legend{position:fixed;left:16px;bottom:16px;z-index:60;display:flex;gap:6px;flex-wrap:wrap;background:rgba(255,255,255,.94);border:1px solid #dbe3ef;border-radius:999px;padding:7px 9px;box-shadow:0 10px 28px rgba(15,23,42,.13);font-size:11px;color:#334155}
+.branch-legend span{display:inline-flex;align-items:center;gap:5px;white-space:nowrap}
+.branch-legend i{display:inline-block;width:10px;height:10px;border-radius:2px;border:1px solid #64748b}
+.branch-legend .c1{background:#e0f2fe;border-color:#0369a1}.branch-legend .c2{background:#fff7ed;border-color:#c2410c}.branch-legend .c3{background:#ecfdf5;border-color:#047857}.branch-legend .c4{background:#eff6ff;border-color:#1d4ed8}.branch-legend .c5{background:#fffbeb;border-color:#b45309}.branch-legend .c6{background:#f5f3ff;border-color:#7c3aed}
+
+/* v5b: ajuste cirúrgico das DFs, mantendo a base visual da v4 */
+.df-zone{position:absolute;z-index:0;border:1.4px dashed #f59e0b;background:rgba(255,251,235,.42);border-radius:12px;pointer-events:none;}
+.df-zone span{position:absolute;left:12px;top:-22px;background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;border-radius:999px;padding:4px 9px;font-size:11px;font-weight:900;box-shadow:0 4px 12px rgba(15,23,42,.08);}
+.org-node.df-low{font-size:10.5px;line-height:1.05;}
+.org-node.df-low .tip{top:auto;bottom:calc(100% + 9px);}
+
+</style>
+</head>
+<body>
+<header class="header">
+<div class="nav">
+<div class="brand"><img alt="TCESP" class="logo" src="https://www.tce.sp.gov.br/sites/default/files/portal/logo_branco_300x100.png"/><div><h1>Conhecendo o Tribunal</h1><p>Organograma interativo do TCESP — arraste, aproxime e explore as unidades</p></div></div>
+<div class="actions">
+<input class="searchbox" id="search" placeholder="Buscar unidade: DTI, UR-11, DF-1..."/>
+<button class="primary" id="handBtn" title="Modo mão: arraste o organograma em qualquer direção">✋ Mão ativa</button>
+<button onclick="zoomStep(.1)" title="Aumentar zoom">+</button>
+<button onclick="zoomStep(-.1)" title="Diminuir zoom">−</button>
+<button onclick="setZoom(1)">100%</button>
+<button onclick="setZoom(.85)">85%</button>
+<button onclick="setZoom(.7)">70%</button>
+<a href="https://www.tce.sp.gov.br/organograma" rel="noopener" target="_blank">Organograma</a>
+<a href="https://www.tce.sp.gov.br/enderecos" rel="noopener" target="_blank">Diretores</a>
+<a href="https://www.tce.sp.gov.br/transparencia-tcesp/gestao-pessoas/quadro-pessoal" rel="noopener" target="_blank">Quadro de pessoal</a>
+</div>
+</div>
+</header>
+<div class="wrap">
+<div class="branch-legend"><span><i class="c1"></i>Direção</span><span><i class="c2"></i>Gabinetes</span><span><i class="c3"></i>Administração</span><span><i class="c4"></i>Tecnologia</span><span><i class="c5"></i>Fiscalização</span><span><i class="c6"></i>URs</span></div>
+<div class="canvas-shell" id="shell"><div class="canvas" id="canvas">
+<svg class="lines" preserveaspectratio="none" viewbox="0 0 2080 1460">
+<rect class="dash-red" height="330" rx="0" width="1670" x="285" y="18"></rect>
+<rect class="dash-red" height="72" rx="0" width="1670" x="285" y="90"></rect>
+<rect class="dash-red" height="190" rx="0" width="600" x="785" y="160"></rect>
+<rect class="dash-red" height="270" rx="0" width="1460" x="565" y="350"></rect>
+<path d="M950.0,42.0 V50.0 H970.0 V58.0"></path>
+<path d="M970.0,88.0 V94.0 H530.0 V100.0"></path>
+<path d="M970.0,88.0 V94.0 H1535.0 V100.0"></path>
+<path d="M530.0,132.0 V141.0 H386.0 V150.0"></path>
+<path d="M386.0,198.0 V206.5 H386.0 V215.0"></path>
+<path d="M530.0,132.0 V141.0 H511.0 V150.0"></path>
+<path d="M511.0,198.0 V206.5 H511.0 V215.0"></path>
+<path d="M530.0,132.0 V141.0 H636.0 V150.0"></path>
+<path d="M636.0,198.0 V206.5 H636.0 V215.0"></path>
+<path d="M530.0,132.0 V171.0 H281.0 V210.0"></path>
+<path d="M970.0,88.0 V119.0 H778.0 V150.0"></path>
+<path d="M970.0,88.0 V119.0 H907.0 V150.0"></path>
+<path d="M970.0,88.0 V119.0 H1064.0 V150.0"></path>
+<path d="M778.0,192.0 V208.5 H806.0 V225.0"></path>
+<path d="M806.0,259.0 V277.0 H537.5 V295.0"></path>
+<path d="M806.0,259.0 V277.0 H602.5 V295.0"></path>
+<path d="M806.0,259.0 V277.0 H667.5 V295.0"></path>
+<path d="M806.0,259.0 V277.0 H732.5 V295.0"></path>
+<path d="M806.0,259.0 V277.0 H797.5 V295.0"></path>
+<path d="M806.0,259.0 V277.0 H876.0 V295.0"></path>
+<path d="M1064.0,198.0 V201.5 H1005.0 V205.0"></path>
+<path d="M1064.0,198.0 V226.5 H1005.0 V255.0"></path>
+<path d="M1064.0,198.0 V251.5 H1005.0 V305.0"></path>
+<path d="M1064.0,198.0 V204.0 H1116.0 V210.0"></path>
+<path d="M1064.0,198.0 V226.5 H1116.0 V255.0"></path>
+<path d="M1064.0,198.0 V249.0 H1116.0 V300.0"></path>
+<path d="M970.0,88.0 V146.5 H1273.0 V205.0"></path>
+<path d="M1273.0,263.0 V276.5 H1276.0 V290.0"></path>
+<path d="M1535.0,132.0 V141.0 H1426.0 V150.0"></path>
+<path d="M1426.0,198.0 V241.5 H1426.0 V285.0"></path>
+<path d="M1535.0,132.0 V141.0 H1566.0 V150.0"></path>
+<path d="M1566.0,198.0 V241.5 H1566.0 V285.0"></path>
+<path d="M1535.0,132.0 V141.0 H1706.0 V150.0"></path>
+<path d="M1706.0,198.0 V241.5 H1706.0 V285.0"></path>
+<path d="M1535.0,132.0 V171.0 H1777.0 V210.0"></path>
+<path d="M970.0,88.0 V224.0 H130.0 V360.0"></path>
+<path d="M970.0,88.0 V224.0 H290.0 V360.0"></path>
+<path d="M970.0,88.0 V224.0 H490.0 V360.0"></path>
+<path d="M970.0,88.0 V229.0 H740.0 V370.0"></path>
+<path d="M970.0,88.0 V229.0 H880.0 V370.0"></path>
+<path d="M970.0,88.0 V239.0 H991.0 V390.0"></path>
+<path d="M970.0,88.0 V229.0 H1117.5 V370.0"></path>
+<path d="M970.0,88.0 V229.0 H1237.5 V370.0"></path>
+<path d="M970.0,88.0 V234.0 H1362.5 V380.0"></path>
+<path d="M970.0,88.0 V234.0 H1507.5 V380.0"></path>
+<path d="M970.0,88.0 V224.0 H1659.0 V360.0"></path>
+<path d="M130.0,430.0 V450.0 H57.5 V470.0"></path>
+<path d="M130.0,430.0 V470.0 H57.5 V510.0"></path>
+<path d="M130.0,430.0 V500.0 H176.0 V570.0"></path>
+<path d="M490.0,430.0 V442.5 H447.5 V455.0"></path>
+<path d="M490.0,430.0 V442.5 H537.5 V455.0"></path>
+<path d="M447.5,483.0 V494.0 H389.0 V505.0"></path>
+<path d="M389.0,551.0 V555.5 H386.0 V560.0"></path>
+<path d="M389.0,551.0 V572.5 H386.0 V594.0"></path>
+<path d="M389.0,551.0 V589.5 H386.0 V628.0"></path>
+<path d="M447.5,483.0 V494.0 H499.0 V505.0"></path>
+<path d="M499.0,551.0 V555.5 H496.0 V560.0"></path>
+<path d="M499.0,551.0 V572.5 H496.0 V594.0"></path>
+<path d="M537.5,483.0 V494.0 H609.0 V505.0"></path>
+<path d="M609.0,551.0 V555.5 H606.0 V560.0"></path>
+<path d="M609.0,551.0 V572.5 H606.0 V594.0"></path>
+<path d="M609.0,551.0 V589.5 H606.0 V628.0"></path>
+<path d="M609.0,551.0 V606.5 H606.0 V662.0"></path>
+<path d="M740.0,428.0 V436.5 H740.0 V445.0"></path>
+<path d="M740.0,428.0 V464.0 H740.0 V500.0"></path>
+<path d="M740.0,428.0 V499.0 H740.0 V570.0"></path>
+<path d="M880.0,428.0 V436.5 H884.5 V445.0"></path>
+<path d="M880.0,428.0 V481.5 H884.5 V535.0"></path>
+<path d="M880.0,428.0 V519.0 H884.5 V610.0"></path>
+<path d="M1117.5,428.0 V436.5 H1117.0 V445.0"></path>
+<path d="M1117.5,428.0 V456.5 H1117.0 V485.0"></path>
+<path d="M1237.5,428.0 V434.0 H1238.0 V440.0"></path>
+<path d="M1237.5,428.0 V456.5 H1238.0 V485.0"></path>
+<path d="M1237.5,428.0 V479.0 H1238.0 V530.0"></path>
+<path d="M1237.5,428.0 V506.5 H1238.0 V585.0"></path>
+<path d="M1362.5,426.0 V440.5 H1371.0 V455.0"></path>
+<path d="M1362.5,426.0 V463.0 H1371.0 V500.0"></path>
+<path d="M1362.5,426.0 V493.0 H1371.0 V560.0"></path>
+<path d="M1659.0,430.0 V442.5 H1562.5 V455.0"></path>
+<path d="M1659.0,430.0 V465.0 H1562.5 V500.0"></path>
+<path d="M1659.0,430.0 V487.5 H1562.5 V545.0"></path>
+<path d="M1659.0,430.0 V440.0 H1701.0 V450.0"></path>
+<path d="M1701.0,480.0 V485.0 H1701.0 V490.0"></path>
+<path d="M1701.0,480.0 V501.0 H1701.0 V522.0"></path>
+<path d="M1701.0,480.0 V517.0 H1701.0 V554.0"></path>
+<path d="M1701.0,480.0 V533.0 H1701.0 V586.0"></path>
+<path d="M1701.0,480.0 V549.0 H1701.0 V618.0"></path>
+<path d="M1659.0,430.0 V440.0 H1804.0 V450.0"></path>
+<path d="M1804.0,480.0 V485.0 H1804.0 V490.0"></path>
+<path d="M1804.0,480.0 V501.0 H1804.0 V522.0"></path>
+<path d="M1804.0,480.0 V517.0 H1804.0 V554.0"></path>
+<path d="M130.0,430.0 V605.0 H65.0 V780.0"></path>
+<path d="M65.0,838.0 V844.0 H63.0 V850.0"></path>
+<path d="M65.0,838.0 V860.0 H63.0 V882.0"></path>
+<path d="M65.0,838.0 V876.0 H63.0 V914.0"></path>
+<path d="M65.0,838.0 V892.0 H63.0 V946.0"></path>
+<path d="M65.0,838.0 V908.0 H63.0 V978.0"></path>
+<path d="M130.0,430.0 V605.0 H155.0 V780.0"></path>
+<path d="M155.0,838.0 V844.0 H153.0 V850.0"></path>
+<path d="M155.0,838.0 V860.0 H153.0 V882.0"></path>
+<path d="M155.0,838.0 V876.0 H153.0 V914.0"></path>
+<path d="M155.0,838.0 V892.0 H153.0 V946.0"></path>
+<path d="M130.0,430.0 V605.0 H255.0 V780.0"></path>
+<path d="M255.0,838.0 V844.0 H253.0 V850.0"></path>
+<path d="M255.0,838.0 V860.0 H253.0 V882.0"></path>
+<path d="M255.0,838.0 V876.0 H253.0 V914.0"></path>
+<path d="M255.0,838.0 V892.0 H253.0 V946.0"></path>
+<path d="M255.0,838.0 V908.0 H253.0 V978.0"></path>
+<path d="M130.0,430.0 V605.0 H360.0 V780.0"></path>
+<path d="M360.0,838.0 V844.0 H358.0 V850.0"></path>
+<path d="M360.0,838.0 V860.0 H358.0 V882.0"></path>
+<path d="M360.0,838.0 V876.0 H358.0 V914.0"></path>
+<path d="M130.0,430.0 V605.0 H475.0 V780.0"></path>
+<path d="M475.0,838.0 V844.0 H473.0 V850.0"></path>
+<path d="M475.0,838.0 V860.0 H473.0 V882.0"></path>
+<path d="M475.0,838.0 V876.0 H473.0 V914.0"></path>
+<path d="M475.0,838.0 V892.0 H473.0 V946.0"></path>
+<path d="M130.0,430.0 V605.0 H585.0 V780.0"></path>
+<path d="M585.0,838.0 V844.0 H583.0 V850.0"></path>
+<path d="M585.0,838.0 V860.0 H583.0 V882.0"></path>
+<path d="M130.0,430.0 V605.0 H690.0 V780.0"></path>
+<path d="M690.0,838.0 V844.0 H688.0 V850.0"></path>
+<path d="M690.0,838.0 V860.0 H688.0 V882.0"></path>
+<path d="M690.0,838.0 V876.0 H688.0 V914.0"></path>
+<path d="M690.0,838.0 V892.0 H688.0 V946.0"></path>
+<path d="M690.0,838.0 V908.0 H688.0 V978.0"></path>
+<path d="M130.0,430.0 V605.0 H805.0 V780.0"></path>
+<path d="M805.0,838.0 V844.0 H803.0 V850.0"></path>
+<path d="M805.0,838.0 V860.0 H803.0 V882.0"></path>
+<path d="M805.0,838.0 V876.0 H803.0 V914.0"></path>
+<path d="M805.0,838.0 V892.0 H803.0 V946.0"></path>
+<path d="M805.0,838.0 V908.0 H803.0 V978.0"></path>
+<path d="M130.0,430.0 V605.0 H932.5 V780.0"></path>
+<path d="M932.5,838.0 V844.0 H936.0 V850.0"></path>
+<path d="M932.5,838.0 V872.0 H936.0 V906.0"></path>
+<path d="M932.5,838.0 V900.0 H936.0 V962.0"></path>
+<path d="M932.5,838.0 V928.0 H936.0 V1018.0"></path>
+<path d="M932.5,838.0 V956.0 H936.0 V1074.0"></path>
+<path d="M1659.0,430.0 V580.0 H1240.0 V730.0"></path>
+<path d="M1240.0,790.0 V795.0 H1258.0 V800.0"></path>
+<path d="M1659.0,430.0 V580.0 H1665.0 V730.0"></path>
+<path d="M1665.0,790.0 V795.0 H1738.0 V800.0"></path>
+<!-- v7: ligações das áreas subordinadas aos DSFs redesenhadas; removidas linhas antigas de DFs em posições inexistentes -->
+<!-- DSF-1.1 -> URs pares/grupo A -->
+<path d="M1258,828 V836 H1145 V845"></path>
+<path d="M1145,871 V877"></path>
+<path d="M1145,903 V909"></path>
+<path d="M1145,935 V941"></path>
+<path d="M1145,967 V973"></path>
+<path d="M1145,999 V1005"></path>
+<path d="M1145,1031 V1037"></path>
+<path d="M1145,1063 V1069"></path>
+<path d="M1145,1095 V1101"></path>
+<path d="M1145,1127 V1133"></path>
+<!-- DSF-1.1 -> núcleos técnicos -->
+<path d="M1258,828 V925 H1440 V1025"></path>
+<path d="M1258,828 V964 H1447.5 V1100"></path>
+<!-- DSF-1.1 -> DFs deslocadas para a faixa inferior -->
+<path class="df-wire" d="M1258,828 V1234"></path>
+<path class="df-wire" d="M1101,1234 H1501"></path>
+<path class="df-wire" d="M1101,1234 V1248"></path>
+<path class="df-wire" d="M1101,1275 V1380"></path>
+<path class="df-wire" d="M1201,1234 V1248"></path>
+<path class="df-wire" d="M1201,1275 V1380"></path>
+<path class="df-wire" d="M1301,1234 V1248"></path>
+<path class="df-wire" d="M1301,1275 V1380"></path>
+<path class="df-wire" d="M1401,1234 V1248"></path>
+<path class="df-wire" d="M1401,1275 V1380"></path>
+<path class="df-wire" d="M1501,1234 V1248"></path>
+<path class="df-wire" d="M1501,1275 V1380"></path>
+<!-- DSF-2.1 -> URs grupo B -->
+<path d="M1738,828 V836 H1545 V845"></path>
+<path d="M1545,871 V877"></path>
+<path d="M1545,903 V909"></path>
+<path d="M1545,935 V941"></path>
+<path d="M1545,967 V973"></path>
+<path d="M1545,999 V1005"></path>
+<path d="M1545,1031 V1037"></path>
+<path d="M1545,1063 V1069"></path>
+<path d="M1545,1095 V1101"></path>
+<path d="M1545,1127 V1133"></path>
+<!-- DSF-2.1 -> DCG -->
+<path d="M1738,828 V837 H1660 V845"></path>
+<path d="M1660,871 V877"></path>
+<path d="M1660,903 V909"></path>
+<path d="M1660,935 V941"></path>
+<path d="M1660,967 V973"></path>
+<!-- DSF-2.1 -> DFs deslocadas para a faixa inferior -->
+<path class="df-wire" d="M1738,828 V1234"></path>
+<path class="df-wire" d="M1621,1234 H2023"></path>
+<path class="df-wire" d="M1621,1234 V1248"></path>
+<path class="df-wire" d="M1621,1275 V1380"></path>
+<path class="df-wire" d="M1721,1234 V1248"></path>
+<path class="df-wire" d="M1721,1275 V1380"></path>
+<path class="df-wire" d="M1821,1234 V1248"></path>
+<path class="df-wire" d="M1821,1275 V1380"></path>
+<path class="df-wire" d="M1921,1234 V1248"></path>
+<path class="df-wire" d="M1921,1275 V1380"></path>
+<path class="df-wire" d="M2023,1234 V1248"></path>
+<path class="df-wire" d="M2023,1275 V1380"></path>
+</svg>
+<div class="df-zone" style="left:1040px;top:1224px;width:500px;height:196px"><span>DFs vinculadas ao bloco DSF-1</span></div>
+<div class="df-zone" style="left:1560px;top:1224px;width:500px;height:196px"><span>DFs vinculadas ao bloco DSF-2</span></div>
+
+<div class="org-node top" data-id="pleno" style="left:845px;top:8px;width:210px;height:34px" tabindex="0">
+<span>TRIBUNAL PLENO</span>
+<div class="tip"><b>TRIBUNAL PLENO</b><p>Instância colegiada superior de deliberação e julgamento.</p></div>
+</div>
+<div class="org-node top2" data-id="pres" style="left:895px;top:58px;width:150px;height:30px" tabindex="0">
+<span>PRESIDÊNCIA</span>
+<div class="tip"><b>PRESIDÊNCIA</b><p>Dirige a gestão superior e a representação institucional.</p></div>
+</div>
+<div class="org-node chamber" data-id="cam1" style="left:455px;top:100px;width:150px;height:32px" tabindex="0">
+<span>PRIMEIRA CÂMARA</span>
+<div class="tip"><b>PRIMEIRA CÂMARA</b><p>Colegiado responsável por julgamentos e deliberações processuais.</p></div>
+</div>
+<div class="org-node chamber" data-id="cam2" style="left:1460px;top:100px;width:150px;height:32px" tabindex="0">
+<span>SEGUNDA CÂMARA</span>
+<div class="tip"><b>SEGUNDA CÂMARA</b><p>Colegiado responsável por julgamentos e deliberações processuais.</p></div>
+</div>
+<div class="org-node judicial" data-id="gabL1" style="left:330px;top:150px;width:112px;height:48px" tabindex="0">
+<span>GABINETE DE
+CONSELHEIRO</span>
+<div class="tip"><b>GABINETE DE
+CONSELHEIRO</b><p>Assessora o Conselheiro na análise e condução de processos.</p></div>
+</div>
+<div class="org-node small" data-id="cartL1" style="left:350px;top:215px;width:72px;height:26px" tabindex="0">
+<span>Cartório</span>
+<div class="tip"><b>Cartório</b><p>Organiza registros, atos e expedientes processuais.</p></div>
+</div>
+<div class="org-node judicial" data-id="gabL2" style="left:455px;top:150px;width:112px;height:48px" tabindex="0">
+<span>GABINETE DE
+CONSELHEIRO</span>
+<div class="tip"><b>GABINETE DE
+CONSELHEIRO</b><p>Assessora o Conselheiro na análise e condução de processos.</p></div>
+</div>
+<div class="org-node small" data-id="cartL2" style="left:475px;top:215px;width:72px;height:26px" tabindex="0">
+<span>Cartório</span>
+<div class="tip"><b>Cartório</b><p>Organiza registros, atos e expedientes processuais.</p></div>
+</div>
+<div class="org-node judicial" data-id="gabL3" style="left:580px;top:150px;width:112px;height:48px" tabindex="0">
+<span>GABINETE DE
+CONSELHEIRO</span>
+<div class="tip"><b>GABINETE DE
+CONSELHEIRO</b><p>Assessora o Conselheiro na análise e condução de processos.</p></div>
+</div>
+<div class="org-node small" data-id="cartL3" style="left:600px;top:215px;width:72px;height:26px" tabindex="0">
+<span>Cartório</span>
+<div class="tip"><b>Cartório</b><p>Organiza registros, atos e expedientes processuais.</p></div>
+</div>
+<div class="org-node external" data-id="mpc" style="left:235px;top:210px;width:92px;height:50px" tabindex="0">
+<span>MINISTÉRIO
+PÚBLICO DE
+CONTAS</span>
+<div class="tip"><b>MINISTÉRIO
+PÚBLICO DE
+CONTAS</b><p>Atua junto ao Tribunal na defesa da ordem jurídica e do interesse público.</p></div>
+</div>
+<div class="org-node dashed" data-id="corr" style="left:720px;top:150px;width:116px;height:42px" tabindex="0">
+<span>CORREGEDOR</span>
+<div class="tip"><b>CORREGEDOR</b><p>Acompanha disciplina, regularidade interna e correições.</p></div>
+</div>
+<div class="org-node dashed" data-id="vice" style="left:855px;top:150px;width:104px;height:48px" tabindex="0">
+<span>VICE
+PRESIDÊNCIA</span>
+<div class="tip"><b>VICE
+PRESIDÊNCIA</b><p>Apoia a direção superior e substitui a Presidência quando cabível.</p></div>
+</div>
+<div class="org-node judicial" data-id="gabpres" style="left:1005px;top:150px;width:118px;height:48px" tabindex="0">
+<span>GABINETE
+PRESIDÊNCIA</span>
+<div class="tip"><b>GABINETE
+PRESIDÊNCIA</b><p>Presta apoio direto às rotinas da Presidência.</p></div>
+</div>
+<div class="org-node admin" data-id="epcp" style="left:770px;top:225px;width:72px;height:34px" tabindex="0">
+<span>EPCP</span>
+<div class="tip"><b>EPCP</b><p>Promove capacitação, memória institucional e apoio ao conhecimento.</p></div>
+</div>
+<div class="org-node small" data-id="epcp1" style="left:510px;top:295px;width:55px;height:28px" tabindex="0">
+<span>EPCP-1</span>
+<div class="tip"><b>EPCP-1</b><p>Promove capacitação, memória institucional e apoio ao conhecimento.</p></div>
+</div>
+<div class="org-node small" data-id="epcp2" style="left:575px;top:295px;width:55px;height:28px" tabindex="0">
+<span>EPCP-2</span>
+<div class="tip"><b>EPCP-2</b><p>Promove capacitação, memória institucional e apoio ao conhecimento.</p></div>
+</div>
+<div class="org-node small" data-id="epcp3" style="left:640px;top:295px;width:55px;height:28px" tabindex="0">
+<span>EPCP-3</span>
+<div class="tip"><b>EPCP-3</b><p>Promove capacitação, memória institucional e apoio ao conhecimento.</p></div>
+</div>
+<div class="org-node small" data-id="epcp4" style="left:705px;top:295px;width:55px;height:28px" tabindex="0">
+<span>EPCP-4</span>
+<div class="tip"><b>EPCP-4</b><p>Promove capacitação, memória institucional e apoio ao conhecimento.</p></div>
+</div>
+<div class="org-node small" data-id="epcp5" style="left:770px;top:295px;width:55px;height:28px" tabindex="0">
+<span>EPCP-5</span>
+<div class="tip"><b>EPCP-5</b><p>Promove capacitação, memória institucional e apoio ao conhecimento.</p></div>
+</div>
+<div class="org-node small" data-id="biblioteca" style="left:835px;top:295px;width:82px;height:28px" tabindex="0">
+<span>Biblioteca</span>
+<div class="tip"><b>Biblioteca</b><p>Promove capacitação, memória institucional e apoio ao conhecimento.</p></div>
+</div>
+<div class="org-node small" data-id="assmil" style="left:965px;top:205px;width:80px;height:42px" tabindex="0">
+<span>Assessoria
+Militar</span>
+<div class="tip"><b>Assessoria
+Militar</b><p>Presta apoio especializado à Presidência em assuntos militares.</p></div>
+</div>
+<div class="org-node small" data-id="asspc" style="left:965px;top:255px;width:80px;height:42px" tabindex="0">
+<span>Assessoria
+Polícia Civil</span>
+<div class="tip"><b>Assessoria
+Polícia Civil</b><p>Presta apoio especializado à Presidência em assuntos de polícia civil.</p></div>
+</div>
+<div class="org-node small" data-id="cti" style="left:975px;top:305px;width:60px;height:28px" tabindex="0">
+<span>CTI</span>
+<div class="tip"><b>CTI</b><p>Apoio técnico especializado vinculado à Presidência.</p></div>
+</div>
+<div class="org-node small" data-id="cartpres" style="left:1075px;top:210px;width:82px;height:28px" tabindex="0">
+<span>Cartório</span>
+<div class="tip"><b>Cartório</b><p>Organiza registros, atos e expedientes processuais.</p></div>
+</div>
+<div class="org-node small" data-id="memorial" style="left:1075px;top:255px;width:82px;height:28px" tabindex="0">
+<span>Memorial</span>
+<div class="tip"><b>Memorial</b><p>Promove capacitação, memória institucional e apoio ao conhecimento.</p></div>
+</div>
+<div class="org-node small" data-id="proc_ele" style="left:1072px;top:300px;width:88px;height:36px" tabindex="0">
+<span>Processo
+Eletrônico</span>
+<div class="tip"><b>Processo
+Eletrônico</b><p>Apoia a evolução e o uso de rotinas processuais digitais.</p></div>
+</div>
+<div class="org-node judicial" data-id="auditores" style="left:1215px;top:205px;width:116px;height:58px" tabindex="0">
+<span>CONSELHEIROS
+SUBSTITUTOS -
+AUDITORES</span>
+<div class="tip"><b>CONSELHEIROS
+SUBSTITUTOS -
+AUDITORES</b><p>Estrutura de apoio aos Conselheiros Substitutos-Auditores.</p></div>
+</div>
+<div class="org-node small" data-id="cartaud" style="left:1235px;top:290px;width:82px;height:28px" tabindex="0">
+<span>Cartório</span>
+<div class="tip"><b>Cartório</b><p>Organiza registros, atos e expedientes processuais.</p></div>
+</div>
+<div class="org-node judicial" data-id="gabR1" style="left:1370px;top:150px;width:112px;height:48px" tabindex="0">
+<span>GABINETE DE
+CONSELHEIRO</span>
+<div class="tip"><b>GABINETE DE
+CONSELHEIRO</b><p>Assessora o Conselheiro na análise e condução de processos.</p></div>
+</div>
+<div class="org-node small" data-id="cartR1" style="left:1390px;top:285px;width:72px;height:26px" tabindex="0">
+<span>Cartório</span>
+<div class="tip"><b>Cartório</b><p>Organiza registros, atos e expedientes processuais.</p></div>
+</div>
+<div class="org-node judicial" data-id="gabR2" style="left:1510px;top:150px;width:112px;height:48px" tabindex="0">
+<span>GABINETE DE
+CONSELHEIRO</span>
+<div class="tip"><b>GABINETE DE
+CONSELHEIRO</b><p>Assessora o Conselheiro na análise e condução de processos.</p></div>
+</div>
+<div class="org-node small" data-id="cartR2" style="left:1530px;top:285px;width:72px;height:26px" tabindex="0">
+<span>Cartório</span>
+<div class="tip"><b>Cartório</b><p>Organiza registros, atos e expedientes processuais.</p></div>
+</div>
+<div class="org-node judicial" data-id="gabR3" style="left:1650px;top:150px;width:112px;height:48px" tabindex="0">
+<span>GABINETE DE
+CONSELHEIRO</span>
+<div class="tip"><b>GABINETE DE
+CONSELHEIRO</b><p>Assessora o Conselheiro na análise e condução de processos.</p></div>
+</div>
+<div class="org-node small" data-id="cartR3" style="left:1670px;top:285px;width:72px;height:26px" tabindex="0">
+<span>Cartório</span>
+<div class="tip"><b>Cartório</b><p>Organiza registros, atos e expedientes processuais.</p></div>
+</div>
+<div class="org-node external" data-id="pfe" style="left:1730px;top:210px;width:94px;height:58px" tabindex="0">
+<span>PFE
+Procuradoria
+da Fazenda</span>
+<div class="tip"><b>PFE
+Procuradoria
+da Fazenda</b><p>Representação jurídica da Fazenda Pública junto ao Tribunal.</p></div>
+</div>
+<div class="org-node admin" data-id="dga" style="left:70px;top:360px;width:120px;height:70px" tabindex="0">
+<span>DGA
+Depto. Geral da
+Administração</span>
+<div class="tip"><b>DGA
+Depto. Geral da
+Administração</b><p>Coordena pessoal, finanças, materiais, serviços e apoio administrativo.</p></div>
+</div>
+<div class="org-node admin" data-id="gtp" style="left:235px;top:360px;width:110px;height:70px" tabindex="0">
+<span>GTP
+Gab. Técnico
+da Presidência</span>
+<div class="tip"><b>GTP
+Gab. Técnico
+da Presidência</b><p>Presta apoio técnico à Presidência.</p></div>
+</div>
+<div class="org-node tech" data-id="dti" style="left:430px;top:360px;width:120px;height:70px" tabindex="0">
+<span>DTI
+Depto.Tecno.
+Informação</span>
+<div class="tip"><b>DTI
+Depto.Tecno.
+Informação</b><p>Coordena tecnologia, sistemas, infraestrutura e segurança da informação.</p></div>
+</div>
+<div class="org-node admin" data-id="dirproc" style="left:685px;top:370px;width:110px;height:58px" tabindex="0">
+<span>Diretoria de
+Gerenciamento de
+Processos</span>
+<div class="tip"><b>Diretoria de
+Gerenciamento de
+Processos</b><p>Apoia gestão de processos, cadastros, acesso e atendimento técnico.</p></div>
+</div>
+<div class="org-node admin" data-id="dircom" style="left:825px;top:370px;width:110px;height:58px" tabindex="0">
+<span>Diretoria de
+Comunicação
+Institucional</span>
+<div class="tip"><b>Diretoria de
+Comunicação
+Institucional</b><p>Coordena comunicação institucional, imprensa, conteúdo e identidade visual.</p></div>
+</div>
+<div class="org-node admin" data-id="revista" style="left:950px;top:390px;width:82px;height:42px" tabindex="0">
+<span>Revista do
+TCESP</span>
+<div class="tip"><b>Revista do
+TCESP</b><p>Produz conteúdo editorial e publicações institucionais.</p></div>
+</div>
+<div class="org-node admin" data-id="dce" style="left:1065px;top:370px;width:105px;height:58px" tabindex="0">
+<span>Diretoria de
+Coordenação
+Estratégica</span>
+<div class="tip"><b>Diretoria de
+Coordenação
+Estratégica</b><p>Apoia planejamento, coordenação estratégica e monitoramento.</p></div>
+</div>
+<div class="org-node admin" data-id="direxppres" style="left:1185px;top:370px;width:105px;height:58px" tabindex="0">
+<span>Diretoria de
+Expediente da
+Presidência</span>
+<div class="tip"><b>Diretoria de
+Expediente da
+Presidência</b><p>Organiza protocolo, expediente e tramitação administrativa.</p></div>
+</div>
+<div class="org-node admin" data-id="ouvid" style="left:1315px;top:380px;width:95px;height:46px" tabindex="0">
+<span>Ouvidoria</span>
+<div class="tip"><b>Ouvidoria</b><p>Recebe manifestações do cidadão e encaminha demandas ao Tribunal.</p></div>
+</div>
+<div class="org-node admin" data-id="control" style="left:1455px;top:380px;width:105px;height:46px" tabindex="0">
+<span>Controladoria</span>
+<div class="tip"><b>Controladoria</b><p>Acompanha controles internos, integridade e gestão institucional.</p></div>
+</div>
+<div class="org-node fiscal" data-id="sdg" style="left:1600px;top:360px;width:118px;height:70px" tabindex="0">
+<span>SDG
+Secretaria
+Diretoria-Geral</span>
+<div class="tip"><b>SDG
+Secretaria
+Diretoria-Geral</b><p>Coordena secretaria, instrução processual e suporte técnico à fiscalização.</p></div>
+</div>
+<div class="org-node small" data-id="dga1" style="left:20px;top:470px;width:75px;height:28px" tabindex="0">
+<span>DGA-1</span>
+<div class="tip"><b>DGA-1</b><p>Apoio administrativo vinculado ao Departamento Geral da Administração.</p></div>
+</div>
+<div class="org-node small" data-id="cpc" style="left:20px;top:510px;width:75px;height:28px" tabindex="0">
+<span>CPC</span>
+<div class="tip"><b>CPC</b><p>Apoio administrativo vinculado ao Departamento Geral da Administração.</p></div>
+</div>
+<div class="org-node small" data-id="at_esfera" style="left:130px;top:570px;width:92px;height:50px" tabindex="0">
+<span>Grupo Atend.
+Esfera Municipal</span>
+<div class="tip"><b>Grupo Atend.
+Esfera Municipal</b><p>Apoio administrativo vinculado ao Departamento Geral da Administração.</p></div>
+</div>
+<div class="org-node small" data-id="dti1" style="left:410px;top:455px;width:75px;height:28px" tabindex="0">
+<span>DTI-1</span>
+<div class="tip"><b>DTI-1</b><p>Subunidade de apoio à gestão de tecnologia da informação.</p></div>
+</div>
+<div class="org-node small" data-id="dti2" style="left:500px;top:455px;width:75px;height:28px" tabindex="0">
+<span>DTI-2</span>
+<div class="tip"><b>DTI-2</b><p>Subunidade de apoio à gestão de tecnologia da informação.</p></div>
+</div>
+<div class="org-node tech" data-id="dtec" style="left:345px;top:505px;width:88px;height:46px" tabindex="0">
+<span>DTEC</span>
+<div class="tip"><b>DTEC</b><p>Desenvolve e mantém soluções tecnológicas.</p></div>
+</div>
+<div class="org-node small" data-id="dtec1" style="left:350px;top:560px;width:72px;height:26px" tabindex="0">
+<span>DTEC-1</span>
+<div class="tip"><b>DTEC-1</b><p>Desenvolve e mantém soluções tecnológicas.</p></div>
+</div>
+<div class="org-node small" data-id="dtec2" style="left:350px;top:594px;width:72px;height:26px" tabindex="0">
+<span>DTEC-2</span>
+<div class="tip"><b>DTEC-2</b><p>Desenvolve e mantém soluções tecnológicas.</p></div>
+</div>
+<div class="org-node small" data-id="dtec3" style="left:350px;top:628px;width:72px;height:26px" tabindex="0">
+<span>DTEC-3</span>
+<div class="tip"><b>DTEC-3</b><p>Desenvolve e mantém soluções tecnológicas.</p></div>
+</div>
+<div class="org-node tech" data-id="dseg" style="left:455px;top:505px;width:88px;height:46px" tabindex="0">
+<span>DSEG</span>
+<div class="tip"><b>DSEG</b><p>Atua em segurança da informação e proteção tecnológica.</p></div>
+</div>
+<div class="org-node small" data-id="dseg1" style="left:460px;top:560px;width:72px;height:26px" tabindex="0">
+<span>DSEG-1</span>
+<div class="tip"><b>DSEG-1</b><p>Atua em segurança da informação e proteção tecnológica.</p></div>
+</div>
+<div class="org-node small" data-id="dseg2" style="left:460px;top:594px;width:72px;height:26px" tabindex="0">
+<span>DSEG-2</span>
+<div class="tip"><b>DSEG-2</b><p>Atua em segurança da informação e proteção tecnológica.</p></div>
+</div>
+<div class="org-node tech" data-id="dsis" style="left:565px;top:505px;width:88px;height:46px" tabindex="0">
+<span>DSIS</span>
+<div class="tip"><b>DSIS</b><p>Gerencia sistemas institucionais e suporte técnico.</p></div>
+</div>
+<div class="org-node small" data-id="dsis1" style="left:570px;top:560px;width:72px;height:26px" tabindex="0">
+<span>DSIS-1</span>
+<div class="tip"><b>DSIS-1</b><p>Gerencia sistemas institucionais e suporte técnico.</p></div>
+</div>
+<div class="org-node small" data-id="dsis2" style="left:570px;top:594px;width:72px;height:26px" tabindex="0">
+<span>DSIS-2</span>
+<div class="tip"><b>DSIS-2</b><p>Gerencia sistemas institucionais e suporte técnico.</p></div>
+</div>
+<div class="org-node small" data-id="dsis3" style="left:570px;top:628px;width:72px;height:26px" tabindex="0">
+<span>DSIS-3</span>
+<div class="tip"><b>DSIS-3</b><p>Gerencia sistemas institucionais e suporte técnico.</p></div>
+</div>
+<div class="org-node small" data-id="dsis4" style="left:570px;top:662px;width:72px;height:26px" tabindex="0">
+<span>DSIS-4</span>
+<div class="tip"><b>DSIS-4</b><p>Gerencia sistemas institucionais e suporte técnico.</p></div>
+</div>
+<div class="org-node small" data-id="dirproc0" style="left:680px;top:445px;width:120px;height:48px" tabindex="0">
+<span>Pesquisa e
+Desenvolvimento</span>
+<div class="tip"><b>Pesquisa e
+Desenvolvimento</b><p>Apoia pesquisa, inovação e desenvolvimento institucional.</p></div>
+</div>
+<div class="org-node small" data-id="dirproc1" style="left:680px;top:500px;width:120px;height:48px" tabindex="0">
+<span>Gestão Cadastral,
+Acesso e
+Atendimento</span>
+<div class="tip"><b>Gestão Cadastral,
+Acesso e
+Atendimento</b><p>Gerencia cadastros, acessos e atendimento operacional.</p></div>
+</div>
+<div class="org-node small" data-id="dirproc2" style="left:680px;top:570px;width:120px;height:48px" tabindex="0">
+<span>Apoio Técnico e
+Operacional</span>
+<div class="tip"><b>Apoio Técnico e
+Operacional</b><p>Presta suporte técnico e operacional à área.</p></div>
+</div>
+<div class="org-node small" data-id="dircom0" style="left:822px;top:445px;width:125px;height:70px" tabindex="0">
+<span>Comunicação,
+Reputação e
+Análise de
+Cenário</span>
+<div class="tip"><b>Comunicação,
+Reputação e
+Análise de
+Cenário</b><p>Acompanha comunicação, reputação institucional e análise de cenário.</p></div>
+</div>
+<div class="org-node small" data-id="dircom1" style="left:822px;top:535px;width:125px;height:54px" tabindex="0">
+<span>Conteúdo Digital
+e Mídias</span>
+<div class="tip"><b>Conteúdo Digital
+e Mídias</b><p>Produz conteúdo digital e materiais para mídias.</p></div>
+</div>
+<div class="org-node small" data-id="dircom2" style="left:822px;top:610px;width:125px;height:46px" tabindex="0">
+<span>Marca, Design e
+Identidade Visual</span>
+<div class="tip"><b>Marca, Design e
+Identidade Visual</b><p>Cuida de marca, design e identidade visual.</p></div>
+</div>
+<div class="org-node small" data-id="dce1" style="left:1082px;top:445px;width:70px;height:26px" tabindex="0">
+<span>DCE-1</span>
+<div class="tip"><b>DCE-1</b><p>Apoia planejamento, coordenação estratégica e monitoramento.</p></div>
+</div>
+<div class="org-node small" data-id="dce2" style="left:1082px;top:485px;width:70px;height:26px" tabindex="0">
+<span>DCE-2</span>
+<div class="tip"><b>DCE-2</b><p>Apoia planejamento, coordenação estratégica e monitoramento.</p></div>
+</div>
+<div class="org-node small" data-id="dep0" style="left:1188px;top:440px;width:100px;height:38px" tabindex="0">
+<span>Célula de Apoio</span>
+<div class="tip"><b>Célula de Apoio</b><p>Apoio direto às rotinas da diretoria.</p></div>
+</div>
+<div class="org-node small" data-id="dep1" style="left:1188px;top:485px;width:100px;height:38px" tabindex="0">
+<span>Corpo Técnico</span>
+<div class="tip"><b>Corpo Técnico</b><p>Presta análise e suporte técnico à unidade.</p></div>
+</div>
+<div class="org-node small" data-id="dep2" style="left:1188px;top:530px;width:100px;height:38px" tabindex="0">
+<span>Suporte
+Administrativo</span>
+<div class="tip"><b>Suporte
+Administrativo</b><p>Apoia demandas administrativas da unidade.</p></div>
+</div>
+<div class="org-node small" data-id="dep3" style="left:1188px;top:585px;width:100px;height:38px" tabindex="0">
+<span>Análise
+Processual</span>
+<div class="tip"><b>Análise
+Processual</b><p>Realiza apoio à triagem e análise de processos.</p></div>
+</div>
+<div class="org-node small" data-id="ouvid0" style="left:1325px;top:455px;width:92px;height:34px" tabindex="0">
+<span>SIC</span>
+<div class="tip"><b>SIC</b><p>Atende pedidos de acesso à informação.</p></div>
+</div>
+<div class="org-node small" data-id="ouvid1" style="left:1325px;top:500px;width:92px;height:34px" tabindex="0">
+<span>Ouvidoria das
+Mulheres</span>
+<div class="tip"><b>Ouvidoria das
+Mulheres</b><p>Canal especializado de acolhimento e encaminhamento.</p></div>
+</div>
+<div class="org-node small" data-id="ouvid2" style="left:1325px;top:560px;width:92px;height:34px" tabindex="0">
+<span>Expediente</span>
+<div class="tip"><b>Expediente</b><p>Organiza documentação, registros e rotinas de expediente.</p></div>
+</div>
+<div class="org-node small" data-id="sdgsub0" style="left:1510px;top:455px;width:105px;height:28px" tabindex="0">
+<span>Taquigrafia</span>
+<div class="tip"><b>Taquigrafia</b><p>Registra sessões, reuniões e atos oficiais.</p></div>
+</div>
+<div class="org-node small" data-id="sdgsub1" style="left:1510px;top:500px;width:105px;height:28px" tabindex="0">
+<span>Pauta</span>
+<div class="tip"><b>Pauta</b><p>Organiza pautas de julgamento e sessões.</p></div>
+</div>
+<div class="org-node small" data-id="sdgsub2" style="left:1510px;top:545px;width:105px;height:28px" tabindex="0">
+<span>Jurisprudência</span>
+<div class="tip"><b>Jurisprudência</b><p>Organiza decisões, entendimentos e pesquisa jurisprudencial.</p></div>
+</div>
+<div class="org-node small" data-id="dipe" style="left:1665px;top:450px;width:72px;height:30px" tabindex="0">
+<span>DIPE</span>
+<div class="tip"><b>DIPE</b><p>Apoia informações processuais, expedientes e tramitação eletrônica.</p></div>
+</div>
+<div class="org-node small" data-id="dipe1" style="left:1665px;top:490px;width:72px;height:26px" tabindex="0">
+<span>DIPE-1</span>
+<div class="tip"><b>DIPE-1</b><p>Apoia informações processuais, expedientes e tramitação eletrônica.</p></div>
+</div>
+<div class="org-node small" data-id="dipe2" style="left:1665px;top:522px;width:72px;height:26px" tabindex="0">
+<span>DIPE-2</span>
+<div class="tip"><b>DIPE-2</b><p>Apoia informações processuais, expedientes e tramitação eletrônica.</p></div>
+</div>
+<div class="org-node small" data-id="dipe3" style="left:1665px;top:554px;width:72px;height:26px" tabindex="0">
+<span>DIPE-3</span>
+<div class="tip"><b>DIPE-3</b><p>Apoia informações processuais, expedientes e tramitação eletrônica.</p></div>
+</div>
+<div class="org-node small" data-id="dipe4" style="left:1665px;top:586px;width:72px;height:26px" tabindex="0">
+<span>DIPE-4</span>
+<div class="tip"><b>DIPE-4</b><p>Apoia informações processuais, expedientes e tramitação eletrônica.</p></div>
+</div>
+<div class="org-node small" data-id="dipe5" style="left:1665px;top:618px;width:72px;height:26px" tabindex="0">
+<span>DIPE-5</span>
+<div class="tip"><b>DIPE-5</b><p>Apoia informações processuais, expedientes e tramitação eletrônica.</p></div>
+</div>
+<div class="org-node small" data-id="audesp" style="left:1765px;top:450px;width:78px;height:30px" tabindex="0">
+<span>AUDESP</span>
+<div class="tip"><b>AUDESP</b><p>Recebe e processa dados eletrônicos dos jurisdicionados para fiscalização.</p></div>
+</div>
+<div class="org-node small" data-id="audesp1" style="left:1765px;top:490px;width:78px;height:26px" tabindex="0">
+<span>AUDESP-1</span>
+<div class="tip"><b>AUDESP-1</b><p>Recebe e processa dados eletrônicos dos jurisdicionados para fiscalização.</p></div>
+</div>
+<div class="org-node small" data-id="audesp2" style="left:1765px;top:522px;width:78px;height:26px" tabindex="0">
+<span>AUDESP-2</span>
+<div class="tip"><b>AUDESP-2</b><p>Recebe e processa dados eletrônicos dos jurisdicionados para fiscalização.</p></div>
+</div>
+<div class="org-node small" data-id="audesp3" style="left:1765px;top:554px;width:78px;height:26px" tabindex="0">
+<span>AUDESP-3</span>
+<div class="tip"><b>AUDESP-3</b><p>Recebe e processa dados eletrônicos dos jurisdicionados para fiscalização.</p></div>
+</div>
+<div class="org-node admin" data-id="dgp" style="left:20px;top:780px;width:90px;height:58px" tabindex="0">
+<span>Diretoria de
+Gestão de
+Pessoas</span>
+<div class="tip"><b>Diretoria de
+Gestão de
+Pessoas</b><p>Cuida de cadastro, vida funcional e rotinas de pessoal.</p></div>
+</div>
+<div class="org-node small" data-id="dgp1" style="left:28px;top:850px;width:70px;height:26px" tabindex="0">
+<span>DGP-1</span>
+<div class="tip"><b>DGP-1</b><p>Cuida de cadastro, vida funcional e rotinas de pessoal.</p></div>
+</div>
+<div class="org-node small" data-id="dgp2" style="left:28px;top:882px;width:70px;height:26px" tabindex="0">
+<span>DGP-2</span>
+<div class="tip"><b>DGP-2</b><p>Cuida de cadastro, vida funcional e rotinas de pessoal.</p></div>
+</div>
+<div class="org-node small" data-id="dgp3" style="left:28px;top:914px;width:70px;height:26px" tabindex="0">
+<span>DGP-3</span>
+<div class="tip"><b>DGP-3</b><p>Cuida de cadastro, vida funcional e rotinas de pessoal.</p></div>
+</div>
+<div class="org-node small" data-id="dgp4" style="left:28px;top:946px;width:70px;height:26px" tabindex="0">
+<span>DGP-4</span>
+<div class="tip"><b>DGP-4</b><p>Cuida de cadastro, vida funcional e rotinas de pessoal.</p></div>
+</div>
+<div class="org-node small" data-id="dgp5" style="left:28px;top:978px;width:70px;height:26px" tabindex="0">
+<span>DGP-5</span>
+<div class="tip"><b>DGP-5</b><p>Cuida de cadastro, vida funcional e rotinas de pessoal.</p></div>
+</div>
+<div class="org-node admin" data-id="ddp" style="left:110px;top:780px;width:90px;height:58px" tabindex="0">
+<span>Dir. de
+Despesa de
+Pessoal</span>
+<div class="tip"><b>Dir. de
+Despesa de
+Pessoal</b><p>Acompanha despesas e registros relativos a pessoal.</p></div>
+</div>
+<div class="org-node small" data-id="ddp1" style="left:118px;top:850px;width:70px;height:26px" tabindex="0">
+<span>DDP-1</span>
+<div class="tip"><b>DDP-1</b><p>Acompanha despesas e registros relativos a pessoal.</p></div>
+</div>
+<div class="org-node small" data-id="ddp2" style="left:118px;top:882px;width:70px;height:26px" tabindex="0">
+<span>DDP-2</span>
+<div class="tip"><b>DDP-2</b><p>Acompanha despesas e registros relativos a pessoal.</p></div>
+</div>
+<div class="org-node small" data-id="ddp3" style="left:118px;top:914px;width:70px;height:26px" tabindex="0">
+<span>DDP-3</span>
+<div class="tip"><b>DDP-3</b><p>Acompanha despesas e registros relativos a pessoal.</p></div>
+</div>
+<div class="org-node small" data-id="ddp4" style="left:118px;top:946px;width:70px;height:26px" tabindex="0">
+<span>DDP-4</span>
+<div class="tip"><b>DDP-4</b><p>Acompanha despesas e registros relativos a pessoal.</p></div>
+</div>
+<div class="org-node admin" data-id="de" style="left:210px;top:780px;width:90px;height:58px" tabindex="0">
+<span>Diretoria de
+Expediente</span>
+<div class="tip"><b>Diretoria de
+Expediente</b><p>Organiza protocolo, expediente e tramitação administrativa.</p></div>
+</div>
+<div class="org-node small" data-id="de1" style="left:218px;top:850px;width:70px;height:26px" tabindex="0">
+<span>DE-1</span>
+<div class="tip"><b>DE-1</b><p>Organiza protocolo, expediente e tramitação administrativa.</p></div>
+</div>
+<div class="org-node small" data-id="de2" style="left:218px;top:882px;width:70px;height:26px" tabindex="0">
+<span>DE-2</span>
+<div class="tip"><b>DE-2</b><p>Organiza protocolo, expediente e tramitação administrativa.</p></div>
+</div>
+<div class="org-node small" data-id="de3" style="left:218px;top:914px;width:70px;height:26px" tabindex="0">
+<span>DE-3</span>
+<div class="tip"><b>DE-3</b><p>Organiza protocolo, expediente e tramitação administrativa.</p></div>
+</div>
+<div class="org-node small" data-id="de4" style="left:218px;top:946px;width:70px;height:26px" tabindex="0">
+<span>DE-4</span>
+<div class="tip"><b>DE-4</b><p>Organiza protocolo, expediente e tramitação administrativa.</p></div>
+</div>
+<div class="org-node small" data-id="de5" style="left:218px;top:978px;width:70px;height:26px" tabindex="0">
+<span>DE-5</span>
+<div class="tip"><b>DE-5</b><p>Organiza protocolo, expediente e tramitação administrativa.</p></div>
+</div>
+<div class="org-node admin" data-id="dcf" style="left:315px;top:780px;width:90px;height:58px" tabindex="0">
+<span>Diretoria de
+Contabilidade
+e Finanças</span>
+<div class="tip"><b>Diretoria de
+Contabilidade
+e Finanças</b><p>Trata registros contábeis, financeiros e orçamentários.</p></div>
+</div>
+<div class="org-node small" data-id="dcf1" style="left:323px;top:850px;width:70px;height:26px" tabindex="0">
+<span>DCF-1</span>
+<div class="tip"><b>DCF-1</b><p>Trata registros contábeis, financeiros e orçamentários.</p></div>
+</div>
+<div class="org-node small" data-id="dcf2" style="left:323px;top:882px;width:70px;height:26px" tabindex="0">
+<span>DCF-2</span>
+<div class="tip"><b>DCF-2</b><p>Trata registros contábeis, financeiros e orçamentários.</p></div>
+</div>
+<div class="org-node small" data-id="dcf3" style="left:323px;top:914px;width:70px;height:26px" tabindex="0">
+<span>DCF-3</span>
+<div class="tip"><b>DCF-3</b><p>Trata registros contábeis, financeiros e orçamentários.</p></div>
+</div>
+<div class="org-node admin" data-id="dm" style="left:430px;top:780px;width:90px;height:58px" tabindex="0">
+<span>Diretoria de
+Materiais</span>
+<div class="tip"><b>Diretoria de
+Materiais</b><p>Gerencia materiais, compras internas e almoxarifado.</p></div>
+</div>
+<div class="org-node small" data-id="dm1" style="left:438px;top:850px;width:70px;height:26px" tabindex="0">
+<span>DM-1</span>
+<div class="tip"><b>DM-1</b><p>Gerencia materiais, compras internas e almoxarifado.</p></div>
+</div>
+<div class="org-node small" data-id="dm2" style="left:438px;top:882px;width:70px;height:26px" tabindex="0">
+<span>DM-2</span>
+<div class="tip"><b>DM-2</b><p>Gerencia materiais, compras internas e almoxarifado.</p></div>
+</div>
+<div class="org-node small" data-id="dm3" style="left:438px;top:914px;width:70px;height:26px" tabindex="0">
+<span>DM-3</span>
+<div class="tip"><b>DM-3</b><p>Gerencia materiais, compras internas e almoxarifado.</p></div>
+</div>
+<div class="org-node small" data-id="dm4" style="left:438px;top:946px;width:70px;height:26px" tabindex="0">
+<span>DM-4</span>
+<div class="tip"><b>DM-4</b><p>Gerencia materiais, compras internas e almoxarifado.</p></div>
+</div>
+<div class="org-node admin" data-id="dt" style="left:540px;top:780px;width:90px;height:58px" tabindex="0">
+<span>Diretoria
+Transp.</span>
+<div class="tip"><b>Diretoria
+Transp.</b><p>Apoia transporte, deslocamentos e logística operacional.</p></div>
+</div>
+<div class="org-node small" data-id="dt1" style="left:548px;top:850px;width:70px;height:26px" tabindex="0">
+<span>DT-1</span>
+<div class="tip"><b>DT-1</b><p>Apoia transporte, deslocamentos e logística operacional.</p></div>
+</div>
+<div class="org-node small" data-id="dt2" style="left:548px;top:882px;width:70px;height:26px" tabindex="0">
+<span>DT-2</span>
+<div class="tip"><b>DT-2</b><p>Apoia transporte, deslocamentos e logística operacional.</p></div>
+</div>
+<div class="org-node admin" data-id="ds" style="left:645px;top:780px;width:90px;height:58px" tabindex="0">
+<span>Diretoria de
+Serviços</span>
+<div class="tip"><b>Diretoria de
+Serviços</b><p>Gerencia serviços administrativos e apoio predial.</p></div>
+</div>
+<div class="org-node small" data-id="ds1" style="left:653px;top:850px;width:70px;height:26px" tabindex="0">
+<span>DS-1</span>
+<div class="tip"><b>DS-1</b><p>Gerencia serviços administrativos e apoio predial.</p></div>
+</div>
+<div class="org-node small" data-id="ds2" style="left:653px;top:882px;width:70px;height:26px" tabindex="0">
+<span>DS-2</span>
+<div class="tip"><b>DS-2</b><p>Gerencia serviços administrativos e apoio predial.</p></div>
+</div>
+<div class="org-node small" data-id="ds3" style="left:653px;top:914px;width:70px;height:26px" tabindex="0">
+<span>DS-3</span>
+<div class="tip"><b>DS-3</b><p>Gerencia serviços administrativos e apoio predial.</p></div>
+</div>
+<div class="org-node small" data-id="ds4" style="left:653px;top:946px;width:70px;height:26px" tabindex="0">
+<span>DS-4</span>
+<div class="tip"><b>DS-4</b><p>Gerencia serviços administrativos e apoio predial.</p></div>
+</div>
+<div class="org-node small" data-id="ds5" style="left:653px;top:978px;width:70px;height:26px" tabindex="0">
+<span>DS-5</span>
+<div class="tip"><b>DS-5</b><p>Gerencia serviços administrativos e apoio predial.</p></div>
+</div>
+<div class="org-node admin" data-id="dcp" style="left:760px;top:780px;width:90px;height:58px" tabindex="0">
+<span>Diretoria de
+Contratos e
+Projetos</span>
+<div class="tip"><b>Diretoria de
+Contratos e
+Projetos</b><p>Acompanha contratos, projetos e execução administrativa.</p></div>
+</div>
+<div class="org-node small" data-id="dcp1" style="left:768px;top:850px;width:70px;height:26px" tabindex="0">
+<span>DCP-1</span>
+<div class="tip"><b>DCP-1</b><p>Acompanha contratos, projetos e execução administrativa.</p></div>
+</div>
+<div class="org-node small" data-id="dcp2" style="left:768px;top:882px;width:70px;height:26px" tabindex="0">
+<span>DCP-2</span>
+<div class="tip"><b>DCP-2</b><p>Acompanha contratos, projetos e execução administrativa.</p></div>
+</div>
+<div class="org-node small" data-id="dcp3" style="left:768px;top:914px;width:70px;height:26px" tabindex="0">
+<span>DCP-3</span>
+<div class="tip"><b>DCP-3</b><p>Acompanha contratos, projetos e execução administrativa.</p></div>
+</div>
+<div class="org-node small" data-id="dcp4" style="left:768px;top:946px;width:70px;height:26px" tabindex="0">
+<span>DCP-4</span>
+<div class="tip"><b>DCP-4</b><p>Acompanha contratos, projetos e execução administrativa.</p></div>
+</div>
+<div class="org-node small" data-id="dcp5" style="left:768px;top:978px;width:70px;height:26px" tabindex="0">
+<span>DCP-5</span>
+<div class="tip"><b>DCP-5</b><p>Acompanha contratos, projetos e execução administrativa.</p></div>
+</div>
+<div class="org-node admin" data-id="dsas" style="left:880px;top:780px;width:105px;height:58px" tabindex="0">
+<span>Diretoria de Saúde
+e Assistência
+Social</span>
+<div class="tip"><b>Diretoria de Saúde
+e Assistência
+Social</b><p>Presta apoio médico, odontológico e assistencial aos servidores.</p></div>
+</div>
+<div class="org-node small" data-id="dsas0" style="left:895px;top:850px;width:82px;height:36px" tabindex="0">
+<span>Corpo
+Médico</span>
+<div class="tip"><b>Corpo
+Médico</b><p>Apoio médico aos servidores.</p></div>
+</div>
+<div class="org-node small" data-id="dsas1" style="left:895px;top:906px;width:82px;height:36px" tabindex="0">
+<span>Corpo
+Odontológico</span>
+<div class="tip"><b>Corpo
+Odontológico</b><p>Apoio odontológico aos servidores.</p></div>
+</div>
+<div class="org-node small" data-id="dsas2" style="left:895px;top:962px;width:82px;height:48px" tabindex="0">
+<span>Núcleo de
+Assistência
+Social</span>
+<div class="tip"><b>Núcleo de
+Assistência
+Social</b><p>Apoio social e orientação aos servidores.</p></div>
+</div>
+<div class="org-node small" data-id="dsas3" style="left:895px;top:1018px;width:82px;height:54px" tabindex="0">
+<span>Núcleo de
+Apoio Técnico
+à Saúde</span>
+<div class="tip"><b>Núcleo de
+Apoio Técnico
+à Saúde</b><p>Apoio técnico às demandas de saúde.</p></div>
+</div>
+<div class="org-node small" data-id="dsas4" style="left:895px;top:1074px;width:82px;height:54px" tabindex="0">
+<span>Núcleo de
+Apoio
+Administrativo</span>
+<div class="tip"><b>Núcleo de
+Apoio
+Administrativo</b><p>Apoio administrativo às rotinas da área.</p></div>
+</div>
+<div class="org-node fiscal" data-id="dsf1" style="left:1175px;top:730px;width:130px;height:60px" tabindex="0">
+<span>DSF-1
+Depto. Supervisão
+de Fiscalização 1</span>
+<div class="tip"><b>DSF-1
+Depto. Supervisão
+de Fiscalização 1</b><p>Supervisiona diretorias e equipes de fiscalização.</p><div class="meta"><strong>Diretor(a): </strong>Paulo Massaru Uesugi Sugiura</div></div>
+</div>
+<div class="org-node small" data-id="dsf11" style="left:1220px;top:800px;width:76px;height:28px" tabindex="0">
+<span>DSF-1.1</span>
+<div class="tip"><b>DSF-1.1</b><p>Supervisiona diretorias e equipes de fiscalização.</p></div>
+</div>
+<div class="org-node fiscal" data-id="dsf2" style="left:1600px;top:730px;width:130px;height:60px" tabindex="0">
+<span>DSF-2
+Depto. Supervisão
+de Fiscalização 2</span>
+<div class="tip"><b>DSF-2
+Depto. Supervisão
+de Fiscalização 2</b><p>Supervisiona diretorias e equipes de fiscalização.</p><div class="meta"><strong>Diretor(a): </strong>Alexandre Teixeira Carsola</div></div>
+</div>
+<div class="org-node small" data-id="dsf21" style="left:1700px;top:800px;width:76px;height:28px" tabindex="0">
+<span>DSF-2.1</span>
+<div class="tip"><b>DSF-2.1</b><p>Supervisiona diretorias e equipes de fiscalização.</p></div>
+</div>
+<div class="org-node regional" data-id="urA0" style="left:1110px;top:845px;width:70px;height:26px" tabindex="0">
+<span>UR-1</span>
+<div class="tip"><b>UR-1</b><p>Sede regional descentralizada de fiscalização e atendimento.</p><div class="meta"><strong>Diretor(a): </strong>Amanda Vieira Pinto da Silva</div></div>
+</div>
+<div class="org-node regional" data-id="urA1" style="left:1110px;top:877px;width:70px;height:26px" tabindex="0">
+<span>UR-3</span>
+<div class="tip"><b>UR-3</b><p>Sede regional descentralizada de fiscalização e atendimento.</p><div class="meta"><strong>Diretor(a): </strong>Ana Cristina Okumura</div></div>
+</div>
+<div class="org-node regional" data-id="urA2" style="left:1110px;top:909px;width:70px;height:26px" tabindex="0">
+<span>UR-6</span>
+<div class="tip"><b>UR-6</b><p>Sede regional descentralizada de fiscalização e atendimento.</p><div class="meta"><strong>Diretor(a): </strong>Flávio Henrique Pastre</div></div>
+</div>
+<div class="org-node regional" data-id="urA3" style="left:1110px;top:941px;width:70px;height:26px" tabindex="0">
+<span>UR-9</span>
+<div class="tip"><b>UR-9</b><p>Sede regional descentralizada de fiscalização e atendimento.</p><div class="meta"><strong>Diretor(a): </strong>Mauro Guimarães Coam</div></div>
+</div>
+<div class="org-node regional" data-id="urA4" style="left:1110px;top:973px;width:70px;height:26px" tabindex="0">
+<span>UR-10</span>
+<div class="tip"><b>UR-10</b><p>Sede regional descentralizada de fiscalização e atendimento.</p><div class="meta"><strong>Diretor(a): </strong>Paulo Cesar Silva Alvarenga</div></div>
+</div>
+<div class="org-node regional" data-id="urA5" style="left:1110px;top:1005px;width:70px;height:26px" tabindex="0">
+<span>UR-13</span>
+<div class="tip"><b>UR-13</b><p>Sede regional descentralizada de fiscalização e atendimento.</p><div class="meta"><strong>Diretor(a): </strong>Marcelo Zaccaro</div></div>
+</div>
+<div class="org-node regional" data-id="urA6" style="left:1110px;top:1037px;width:70px;height:26px" tabindex="0">
+<span>UR-15</span>
+<div class="tip"><b>UR-15</b><p>Sede regional descentralizada de fiscalização e atendimento.</p><div class="meta"><strong>Diretor(a): </strong>Thaís Albani dos Santos</div></div>
+</div>
+<div class="org-node regional" data-id="urA7" style="left:1110px;top:1069px;width:70px;height:26px" tabindex="0">
+<span>UR-16</span>
+<div class="tip"><b>UR-16</b><p>Sede regional descentralizada de fiscalização e atendimento.</p><div class="meta"><strong>Diretor(a): </strong>Camila Simão Costa</div></div>
+</div>
+<div class="org-node regional" data-id="urA8" style="left:1110px;top:1101px;width:70px;height:26px" tabindex="0">
+<span>UR-17</span>
+<div class="tip"><b>UR-17</b><p>Sede regional descentralizada de fiscalização e atendimento.</p><div class="meta"><strong>Diretor(a): </strong>Rodrigo Marques Rodrigues</div></div>
+</div>
+<div class="org-node regional" data-id="urA9" style="left:1110px;top:1133px;width:70px;height:26px" tabindex="0">
+<span>UR-20</span>
+<div class="tip"><b>UR-20</b><p>Sede regional descentralizada de fiscalização e atendimento.</p><div class="meta"><strong>Diretor(a): </strong>Rafael Ribeiro Calegari Gomes</div></div>
+</div>
+<div class="org-node fiscalSmall df-low" data-id="df20" style="left:1060px;top:1248px;width:82px;height:27px" tabindex="0">
+<span>DF-2</span>
+<div class="tip"><b>DF-2</b><p>Fiscaliza contas, atos e gestão dos jurisdicionados de sua área.</p><div class="meta"><strong>Diretor(a): </strong>Cláudio Balmant</div></div>
+</div>
+<div class="org-node fiscalSmall df-low" data-id="df21" style="left:1060px;top:1281px;width:82px;height:27px" tabindex="0">
+<span>DF-2.1</span>
+<div class="tip"><b>DF-2.1</b><p>Subunidade operacional da respectiva Diretoria de Fiscalização.</p></div>
+</div>
+<div class="org-node fiscalSmall df-low" data-id="df22" style="left:1060px;top:1314px;width:82px;height:27px" tabindex="0">
+<span>DF-2.2</span>
+<div class="tip"><b>DF-2.2</b><p>Subunidade operacional da respectiva Diretoria de Fiscalização.</p></div>
+</div>
+<div class="org-node fiscalSmall df-low" data-id="df23" style="left:1060px;top:1347px;width:82px;height:27px" tabindex="0">
+<span>DF-2.3</span>
+<div class="tip"><b>DF-2.3</b><p>Subunidade operacional da respectiva Diretoria de Fiscalização.</p></div>
+</div>
+<div class="org-node fiscalSmall df-low" data-id="df24" style="left:1060px;top:1380px;width:82px;height:27px" tabindex="0">
+<span>DF-2.4</span>
+<div class="tip"><b>DF-2.4</b><p>Subunidade operacional da respectiva Diretoria de Fiscalização.</p></div>
+</div>
+<div class="org-node fiscalSmall df-low" data-id="df50" style="left:1160px;top:1248px;width:82px;height:27px" tabindex="0">
+<span>DF-5</span>
+<div class="tip"><b>DF-5</b><p>Fiscaliza contas, atos e gestão dos jurisdicionados de sua área.</p><div class="meta"><strong>Diretor(a): </strong>Honormélio Pereira da Silveira</div></div>
+</div>
+<div class="org-node fiscalSmall df-low" data-id="df51" style="left:1160px;top:1281px;width:82px;height:27px" tabindex="0">
+<span>DF-5.1</span>
+<div class="tip"><b>DF-5.1</b><p>Subunidade operacional da respectiva Diretoria de Fiscalização.</p></div>
+</div>
+<div class="org-node fiscalSmall df-low" data-id="df52" style="left:1160px;top:1314px;width:82px;height:27px" tabindex="0">
+<span>DF-5.2</span>
+<div class="tip"><b>DF-5.2</b><p>Subunidade operacional da respectiva Diretoria de Fiscalização.</p></div>
+</div>
+<div class="org-node fiscalSmall df-low" data-id="df53" style="left:1160px;top:1347px;width:82px;height:27px" tabindex="0">
+<span>DF-5.3</span>
+<div class="tip"><b>DF-5.3</b><p>Subunidade operacional da respectiva Diretoria de Fiscalização.</p></div>
+</div>
+<div class="org-node fiscalSmall df-low" data-id="df54" style="left:1160px;top:1380px;width:82px;height:27px" tabindex="0">
+<span>DF-5.4</span>
+<div class="tip"><b>DF-5.4</b><p>Subunidade operacional da respectiva Diretoria de Fiscalização.</p></div>
+</div>
+<div class="org-node fiscalSmall df-low" data-id="df60" style="left:1260px;top:1248px;width:82px;height:27px" tabindex="0">
+<span>DF-6</span>
+<div class="tip"><b>DF-6</b><p>Fiscaliza contas, atos e gestão dos jurisdicionados de sua área.</p><div class="meta"><strong>Diretor(a): </strong>Silvia Cristina Ferreira Costa</div></div>
+</div>
+<div class="org-node fiscalSmall df-low" data-id="df61" style="left:1260px;top:1281px;width:82px;height:27px" tabindex="0">
+<span>DF-6.1</span>
+<div class="tip"><b>DF-6.1</b><p>Subunidade operacional da respectiva Diretoria de Fiscalização.</p></div>
+</div>
+<div class="org-node fiscalSmall df-low" data-id="df62" style="left:1260px;top:1314px;width:82px;height:27px" tabindex="0">
+<span>DF-6.2</span>
+<div class="tip"><b>DF-6.2</b><p>Subunidade operacional da respectiva Diretoria de Fiscalização.</p></div>
+</div>
+<div class="org-node fiscalSmall df-low" data-id="df63" style="left:1260px;top:1347px;width:82px;height:27px" tabindex="0">
+<span>DF-6.3</span>
+<div class="tip"><b>DF-6.3</b><p>Subunidade operacional da respectiva Diretoria de Fiscalização.</p></div>
+</div>
+<div class="org-node fiscalSmall df-low" data-id="df64" style="left:1260px;top:1380px;width:82px;height:27px" tabindex="0">
+<span>DF-6.4</span>
+<div class="tip"><b>DF-6.4</b><p>Subunidade operacional da respectiva Diretoria de Fiscalização.</p></div>
+</div>
+<div class="org-node fiscalSmall df-low" data-id="df80" style="left:1360px;top:1248px;width:82px;height:27px" tabindex="0">
+<span>DF-8</span>
+<div class="tip"><b>DF-8</b><p>Fiscaliza contas, atos e gestão dos jurisdicionados de sua área.</p><div class="meta"><strong>Diretor(a): </strong>Fernando Sampaio Bezerra</div></div>
+</div>
+<div class="org-node fiscalSmall df-low" data-id="df81" style="left:1360px;top:1281px;width:82px;height:27px" tabindex="0">
+<span>DF-8.1</span>
+<div class="tip"><b>DF-8.1</b><p>Subunidade operacional da respectiva Diretoria de Fiscalização.</p></div>
+</div>
+<div class="org-node fiscalSmall df-low" data-id="df82" style="left:1360px;top:1314px;width:82px;height:27px" tabindex="0">
+<span>DF-8.2</span>
+<div class="tip"><b>DF-8.2</b><p>Subunidade operacional da respectiva Diretoria de Fiscalização.</p></div>
+</div>
+<div class="org-node fiscalSmall df-low" data-id="df83" style="left:1360px;top:1347px;width:82px;height:27px" tabindex="0">
+<span>DF-8.3</span>
+<div class="tip"><b>DF-8.3</b><p>Subunidade operacional da respectiva Diretoria de Fiscalização.</p></div>
+</div>
+<div class="org-node fiscalSmall df-low" data-id="df84" style="left:1360px;top:1380px;width:82px;height:27px" tabindex="0">
+<span>DF-8.4</span>
+<div class="tip"><b>DF-8.4</b><p>Subunidade operacional da respectiva Diretoria de Fiscalização.</p></div>
+</div>
+<div class="org-node fiscalSmall df-low" data-id="df90" style="left:1460px;top:1248px;width:82px;height:27px" tabindex="0">
+<span>DF-9</span>
+<div class="tip"><b>DF-9</b><p>Fiscaliza contas, atos e gestão dos jurisdicionados de sua área.</p><div class="meta"><strong>Diretor(a): </strong>Pedro de Castro Rubio Poli</div></div>
+</div>
+<div class="org-node fiscalSmall df-low" data-id="df91" style="left:1460px;top:1281px;width:82px;height:27px" tabindex="0">
+<span>DF-9.1</span>
+<div class="tip"><b>DF-9.1</b><p>Subunidade operacional da respectiva Diretoria de Fiscalização.</p></div>
+</div>
+<div class="org-node fiscalSmall df-low" data-id="df92" style="left:1460px;top:1314px;width:82px;height:27px" tabindex="0">
+<span>DF-9.2</span>
+<div class="tip"><b>DF-9.2</b><p>Subunidade operacional da respectiva Diretoria de Fiscalização.</p></div>
+</div>
+<div class="org-node fiscalSmall df-low" data-id="df93" style="left:1460px;top:1347px;width:82px;height:27px" tabindex="0">
+<span>DF-9.3</span>
+<div class="tip"><b>DF-9.3</b><p>Subunidade operacional da respectiva Diretoria de Fiscalização.</p></div>
+</div>
+<div class="org-node fiscalSmall df-low" data-id="df94" style="left:1460px;top:1380px;width:82px;height:27px" tabindex="0">
+<span>DF-9.4</span>
+<div class="tip"><b>DF-9.4</b><p>Subunidade operacional da respectiva Diretoria de Fiscalização.</p></div>
+</div>
+<div class="org-node fiscalSmall" data-id="dcgcol0" style="left:1625px;top:845px;width:70px;height:26px" tabindex="0">
+<span>DCG</span>
+<div class="tip"><b>DCG</b><p>Acompanha e instrui as Contas do Governador.</p><div class="meta"><strong>Diretor(a): </strong>Renata Luciana dos Reis Magalhães</div></div>
+</div>
+<div class="org-node fiscalSmall" data-id="dcgcol1" style="left:1625px;top:877px;width:70px;height:26px" tabindex="0">
+<span>DCG-1</span>
+<div class="tip"><b>DCG-1</b><p>Acompanha e instrui as Contas do Governador.</p></div>
+</div>
+<div class="org-node fiscalSmall" data-id="dcgcol2" style="left:1625px;top:909px;width:70px;height:26px" tabindex="0">
+<span>DCG-2</span>
+<div class="tip"><b>DCG-2</b><p>Acompanha e instrui as Contas do Governador.</p></div>
+</div>
+<div class="org-node fiscalSmall" data-id="dcgcol3" style="left:1625px;top:941px;width:70px;height:26px" tabindex="0">
+<span>DCG-3</span>
+<div class="tip"><b>DCG-3</b><p>Acompanha e instrui as Contas do Governador.</p></div>
+</div>
+<div class="org-node fiscalSmall" data-id="dcgcol4" style="left:1625px;top:973px;width:70px;height:26px" tabindex="0">
+<span>DCG-4</span>
+<div class="tip"><b>DCG-4</b><p>Acompanha e instrui as Contas do Governador.</p></div>
+</div>
+<div class="org-node small" data-id="naec" style="left:1370px;top:1025px;width:140px;height:70px" tabindex="0">
+<span>Núcleo de
+Acompanhamento de
+Execução Contratual –
+NAEC</span>
+<div class="tip"><b>Núcleo de
+Acompanhamento de
+Execução Contratual –
+NAEC</b><p>Acompanha execução contratual e temas especializados.</p></div>
+</div>
+<div class="org-node small" data-id="cofisco" style="left:1370px;top:1100px;width:155px;height:78px" tabindex="0">
+<span>Coordenadoria de
+Fiscalização e Controle
+dos Regimes Próprios
+de Previdência –
+COFISCO</span>
+<div class="tip"><b>Coordenadoria de
+Fiscalização e Controle
+dos Regimes Próprios
+de Previdência –
+COFISCO</b><p>Coordena fiscalização e controle de regimes próprios de previdência.</p></div>
+</div>
+<div class="org-node regional" data-id="urB0" style="left:1510px;top:845px;width:70px;height:26px" tabindex="0">
+<span>UR-2</span>
+<div class="tip"><b>UR-2</b><p>Sede regional descentralizada de fiscalização e atendimento.</p><div class="meta"><strong>Diretor(a): </strong>Luciano Teixeira Savioli</div></div>
+</div>
+<div class="org-node regional" data-id="urB1" style="left:1510px;top:877px;width:70px;height:26px" tabindex="0">
+<span>UR-4</span>
+<div class="tip"><b>UR-4</b><p>Sede regional descentralizada de fiscalização e atendimento.</p><div class="meta"><strong>Diretor(a): </strong>Agnon Ribeiro de Lima</div></div>
+</div>
+<div class="org-node regional" data-id="urB2" style="left:1510px;top:909px;width:70px;height:26px" tabindex="0">
+<span>UR-5</span>
+<div class="tip"><b>UR-5</b><p>Sede regional descentralizada de fiscalização e atendimento.</p><div class="meta"><strong>Diretor(a): </strong>Marcio Eduardo P. Fernandes</div></div>
+</div>
+<div class="org-node regional" data-id="urB3" style="left:1510px;top:941px;width:70px;height:26px" tabindex="0">
+<span>UR-7</span>
+<div class="tip"><b>UR-7</b><p>Sede regional descentralizada de fiscalização e atendimento.</p><div class="meta"><strong>Diretor(a): </strong>Cibele de Lima Z. Martinusso</div></div>
+</div>
+<div class="org-node regional" data-id="urB4" style="left:1510px;top:973px;width:70px;height:26px" tabindex="0">
+<span>UR-8</span>
+<div class="tip"><b>UR-8</b><p>Sede regional descentralizada de fiscalização e atendimento.</p><div class="meta"><strong>Diretor(a): </strong>Namir Antonio Neves</div></div>
+</div>
+<div class="org-node regional" data-id="urB5" style="left:1510px;top:1005px;width:70px;height:26px" tabindex="0">
+<span>UR-11</span>
+<div class="tip"><b>UR-11</b><p>Sede regional descentralizada de fiscalização e atendimento.</p><div class="meta"><strong>Diretor(a): </strong>Denis Cassio Gabriel</div></div>
+</div>
+<div class="org-node regional" data-id="urB6" style="left:1510px;top:1037px;width:70px;height:26px" tabindex="0">
+<span>UR-12</span>
+<div class="tip"><b>UR-12</b><p>Sede regional descentralizada de fiscalização e atendimento.</p><div class="meta"><strong>Diretor(a): </strong>Rodrigo Corrêa da Costa Oliveira</div></div>
+</div>
+<div class="org-node regional" data-id="urB7" style="left:1510px;top:1069px;width:70px;height:26px" tabindex="0">
+<span>UR-14</span>
+<div class="tip"><b>UR-14</b><p>Sede regional descentralizada de fiscalização e atendimento.</p><div class="meta"><strong>Diretor(a): </strong>Francisco José Pupo Nogueira Filho</div></div>
+</div>
+<div class="org-node regional" data-id="urB8" style="left:1510px;top:1101px;width:70px;height:26px" tabindex="0">
+<span>UR-18</span>
+<div class="tip"><b>UR-18</b><p>Sede regional descentralizada de fiscalização e atendimento.</p><div class="meta"><strong>Diretor(a): </strong>Robson Luis Correia</div></div>
+</div>
+<div class="org-node regional" data-id="urB9" style="left:1510px;top:1133px;width:70px;height:26px" tabindex="0">
+<span>UR-19</span>
+<div class="tip"><b>UR-19</b><p>Sede regional descentralizada de fiscalização e atendimento.</p><div class="meta"><strong>Diretor(a): </strong>Vanderlei Marçola</div></div>
+</div>
+<div class="org-node fiscalSmall df-low" data-id="df10" style="left:1580px;top:1248px;width:82px;height:27px" tabindex="0">
+<span>DF-1</span>
+<div class="tip"><b>DF-1</b><p>Fiscaliza contas, atos e gestão dos jurisdicionados de sua área.</p><div class="meta"><strong>Diretor(a): </strong>Gabriel Marchi da Silva</div></div>
+</div>
+<div class="org-node fiscalSmall df-low" data-id="df11" style="left:1580px;top:1281px;width:82px;height:27px" tabindex="0">
+<span>DF-1.1</span>
+<div class="tip"><b>DF-1.1</b><p>Subunidade operacional da respectiva Diretoria de Fiscalização.</p></div>
+</div>
+<div class="org-node fiscalSmall df-low" data-id="df12" style="left:1580px;top:1314px;width:82px;height:27px" tabindex="0">
+<span>DF-1.2</span>
+<div class="tip"><b>DF-1.2</b><p>Subunidade operacional da respectiva Diretoria de Fiscalização.</p></div>
+</div>
+<div class="org-node fiscalSmall df-low" data-id="df13" style="left:1580px;top:1347px;width:82px;height:27px" tabindex="0">
+<span>DF-1.3</span>
+<div class="tip"><b>DF-1.3</b><p>Subunidade operacional da respectiva Diretoria de Fiscalização.</p></div>
+</div>
+<div class="org-node fiscalSmall df-low" data-id="df14" style="left:1580px;top:1380px;width:82px;height:27px" tabindex="0">
+<span>DF-1.4</span>
+<div class="tip"><b>DF-1.4</b><p>Subunidade operacional da respectiva Diretoria de Fiscalização.</p></div>
+</div>
+<div class="org-node fiscalSmall df-low" data-id="df30" style="left:1680px;top:1248px;width:82px;height:27px" tabindex="0">
+<span>DF-3</span>
+<div class="tip"><b>DF-3</b><p>Fiscaliza contas, atos e gestão dos jurisdicionados de sua área.</p><div class="meta"><strong>Diretor(a): </strong>Adelino Detofol</div></div>
+</div>
+<div class="org-node fiscalSmall df-low" data-id="df31" style="left:1680px;top:1281px;width:82px;height:27px" tabindex="0">
+<span>DF-3.1</span>
+<div class="tip"><b>DF-3.1</b><p>Subunidade operacional da respectiva Diretoria de Fiscalização.</p></div>
+</div>
+<div class="org-node fiscalSmall df-low" data-id="df32" style="left:1680px;top:1314px;width:82px;height:27px" tabindex="0">
+<span>DF-3.2</span>
+<div class="tip"><b>DF-3.2</b><p>Subunidade operacional da respectiva Diretoria de Fiscalização.</p></div>
+</div>
+<div class="org-node fiscalSmall df-low" data-id="df33" style="left:1680px;top:1347px;width:82px;height:27px" tabindex="0">
+<span>DF-3.3</span>
+<div class="tip"><b>DF-3.3</b><p>Subunidade operacional da respectiva Diretoria de Fiscalização.</p></div>
+</div>
+<div class="org-node fiscalSmall df-low" data-id="df34" style="left:1680px;top:1380px;width:82px;height:27px" tabindex="0">
+<span>DF-3.4</span>
+<div class="tip"><b>DF-3.4</b><p>Subunidade operacional da respectiva Diretoria de Fiscalização.</p></div>
+</div>
+<div class="org-node fiscalSmall df-low" data-id="df40" style="left:1780px;top:1248px;width:82px;height:27px" tabindex="0">
+<span>DF-4</span>
+<div class="tip"><b>DF-4</b><p>Fiscaliza contas, atos e gestão dos jurisdicionados de sua área.</p><div class="meta"><strong>Diretor(a): </strong>Audria Lucine Martins de Souza</div></div>
+</div>
+<div class="org-node fiscalSmall df-low" data-id="df41" style="left:1780px;top:1281px;width:82px;height:27px" tabindex="0">
+<span>DF-4.1</span>
+<div class="tip"><b>DF-4.1</b><p>Subunidade operacional da respectiva Diretoria de Fiscalização.</p></div>
+</div>
+<div class="org-node fiscalSmall df-low" data-id="df42" style="left:1780px;top:1314px;width:82px;height:27px" tabindex="0">
+<span>DF-4.2</span>
+<div class="tip"><b>DF-4.2</b><p>Subunidade operacional da respectiva Diretoria de Fiscalização.</p></div>
+</div>
+<div class="org-node fiscalSmall df-low" data-id="df43" style="left:1780px;top:1347px;width:82px;height:27px" tabindex="0">
+<span>DF-4.3</span>
+<div class="tip"><b>DF-4.3</b><p>Subunidade operacional da respectiva Diretoria de Fiscalização.</p></div>
+</div>
+<div class="org-node fiscalSmall df-low" data-id="df44" style="left:1780px;top:1380px;width:82px;height:27px" tabindex="0">
+<span>DF-4.4</span>
+<div class="tip"><b>DF-4.4</b><p>Subunidade operacional da respectiva Diretoria de Fiscalização.</p></div>
+</div>
+<div class="org-node fiscalSmall df-low" data-id="df70" style="left:1880px;top:1248px;width:82px;height:27px" tabindex="0">
+<span>DF-7</span>
+<div class="tip"><b>DF-7</b><p>Fiscaliza contas, atos e gestão dos jurisdicionados de sua área.</p><div class="meta"><strong>Diretor(a): </strong>Elias Santos Ferreira</div></div>
+</div>
+<div class="org-node fiscalSmall df-low" data-id="df71" style="left:1880px;top:1281px;width:82px;height:27px" tabindex="0">
+<span>DF-7.1</span>
+<div class="tip"><b>DF-7.1</b><p>Subunidade operacional da respectiva Diretoria de Fiscalização.</p></div>
+</div>
+<div class="org-node fiscalSmall df-low" data-id="df72" style="left:1880px;top:1314px;width:82px;height:27px" tabindex="0">
+<span>DF-7.2</span>
+<div class="tip"><b>DF-7.2</b><p>Subunidade operacional da respectiva Diretoria de Fiscalização.</p></div>
+</div>
+<div class="org-node fiscalSmall df-low" data-id="df73" style="left:1880px;top:1347px;width:82px;height:27px" tabindex="0">
+<span>DF-7.3</span>
+<div class="tip"><b>DF-7.3</b><p>Subunidade operacional da respectiva Diretoria de Fiscalização.</p></div>
+</div>
+<div class="org-node fiscalSmall df-low" data-id="df74" style="left:1880px;top:1380px;width:82px;height:27px" tabindex="0">
+<span>DF-7.4</span>
+<div class="tip"><b>DF-7.4</b><p>Subunidade operacional da respectiva Diretoria de Fiscalização.</p></div>
+</div>
+<div class="org-node fiscalSmall df-low" data-id="df100" style="left:1980px;top:1248px;width:86px;height:27px" tabindex="0">
+<span>DF-10</span>
+<div class="tip"><b>DF-10</b><p>Fiscaliza contas, atos e gestão dos jurisdicionados de sua área.</p><div class="meta"><strong>Diretor(a): </strong>Roberta Azola Gardelli</div></div>
+</div>
+<div class="org-node fiscalSmall df-low" data-id="df101" style="left:1980px;top:1281px;width:86px;height:27px" tabindex="0">
+<span>DF-10.1</span>
+<div class="tip"><b>DF-10.1</b><p>Subunidade operacional da respectiva Diretoria de Fiscalização.</p></div>
+</div>
+<div class="org-node fiscalSmall df-low" data-id="df102" style="left:1980px;top:1314px;width:86px;height:27px" tabindex="0">
+<span>DF-10.2</span>
+<div class="tip"><b>DF-10.2</b><p>Subunidade operacional da respectiva Diretoria de Fiscalização.</p></div>
+</div>
+<div class="org-node fiscalSmall df-low" data-id="df103" style="left:1980px;top:1347px;width:86px;height:27px" tabindex="0">
+<span>DF-10.3</span>
+<div class="tip"><b>DF-10.3</b><p>Subunidade operacional da respectiva Diretoria de Fiscalização.</p></div>
+</div>
+<div class="org-node fiscalSmall df-low" data-id="df104" style="left:1980px;top:1380px;width:86px;height:27px" tabindex="0">
+<span>DF-10.4</span>
+<div class="tip"><b>DF-10.4</b><p>Subunidade operacional da respectiva Diretoria de Fiscalização.</p></div>
+</div>
+
+</div></div>
+</div>
+<div class="footer">Fontes: Organograma oficial do TCESP; página oficial de Endereços; página da AUDESP; Quadro de Pessoal do Portal da Transparência consultado para lotação por departamento. Projeto preparado por @daniel.castro.8.</div>
+<script>
+let z=1;
+const BASE_W=2080, BASE_H=1460;
+const shell=document.getElementById('shell');
+const canvas=document.getElementById('canvas');
+function clamp(n,min,max){ return Math.max(min, Math.min(max,n)); }
+function setZoom(v){
+  z=clamp(Number(v), .45, 1.6);
+  canvas.style.transform='scale('+z+')';
+  canvas.style.width=BASE_W+'px';
+  canvas.style.height=BASE_H+'px';
+  shell.style.setProperty('--z', z);
+}
+function zoomStep(delta){ setZoom((z+delta).toFixed(2)); }
+
+let dragging=false, pointerId=null, startX=0, startY=0, startLeft=0, startTop=0, moved=false;
+function beginPan(e){
+  if(e.button!==undefined && e.button!==0) return;
+  dragging=true; moved=false; pointerId=e.pointerId;
+  startX=e.clientX; startY=e.clientY;
+  startLeft=shell.scrollLeft; startTop=shell.scrollTop;
+  shell.classList.add('dragging');
+  try{ shell.setPointerCapture(pointerId); }catch(_e){}
+  e.preventDefault();
+}
+function movePan(e){
+  if(!dragging || (pointerId!==null && e.pointerId!==pointerId)) return;
+  const dx=e.clientX-startX, dy=e.clientY-startY;
+  if(Math.abs(dx)+Math.abs(dy)>3) moved=true;
+  shell.scrollLeft=startLeft-dx;
+  shell.scrollTop=startTop-dy;
+  e.preventDefault();
+}
+function endPan(e){
+  if(!dragging) return;
+  dragging=false;
+  shell.classList.remove('dragging');
+  try{ if(pointerId!==null) shell.releasePointerCapture(pointerId); }catch(_e){}
+  pointerId=null;
+}
+shell.addEventListener('pointerdown', beginPan, {passive:false});
+shell.addEventListener('pointermove', movePan, {passive:false});
+shell.addEventListener('pointerup', endPan);
+shell.addEventListener('pointercancel', endPan);
+shell.addEventListener('pointerleave', e=>{ if(dragging && e.pointerType==='mouse') endPan(e); });
+shell.addEventListener('click', e=>{ if(moved){ e.preventDefault(); e.stopPropagation(); moved=false; } }, true);
+
+// Roda do mouse: zoom ancorado no ponto do cursor. Shift + roda: pan horizontal. Alt + roda: pan vertical.
+shell.addEventListener('wheel', e=>{
+  e.preventDefault();
+  if(e.shiftKey){ shell.scrollLeft += e.deltaY; return; }
+  if(e.altKey){ shell.scrollTop += e.deltaY; return; }
+  const before=z;
+  const delta=e.deltaY<0 ? .08 : -.08;
+  const rect=shell.getBoundingClientRect();
+  const mx=e.clientX-rect.left+shell.scrollLeft;
+  const my=e.clientY-rect.top+shell.scrollTop;
+  setZoom(z+delta);
+  const ratio=z/before;
+  shell.scrollLeft=(mx*ratio)-(e.clientX-rect.left);
+  shell.scrollTop=(my*ratio)-(e.clientY-rect.top);
+}, {passive:false});
+
+document.getElementById('handBtn').addEventListener('click',()=>{
+  shell.classList.add('dragging');
+  setTimeout(()=>shell.classList.remove('dragging'), 350);
+});
+const search=document.getElementById('search');
+search.addEventListener('input',()=>{
+  const q=search.value.trim().toLowerCase();
+  const nodes=[...document.querySelectorAll('.org-node')];
+  nodes.forEach(n=>n.classList.remove('hit'));
+  if(!q){ canvas.classList.remove('dim'); return; }
+  canvas.classList.add('dim');
+  nodes.forEach(n=>{ if(n.textContent.toLowerCase().includes(q)) n.classList.add('hit'); });
+});
+setZoom(0.85);
+setTimeout(()=>shell.scrollTo({left:260, top:0, behavior:'auto'}), 80);
+</script>
+</body></html>
