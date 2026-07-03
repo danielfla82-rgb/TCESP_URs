@@ -1,0 +1,68 @@
+e regional descentralizada de fiscalização e atendimento.</p><div class="meta"><strong>Diretor(a): </strong>Flávio Henrique Pastre</div></div>
+</div>
+<div class="org-node regional" data-id="urA3" style="left:1110px;top:941px;width:70px;height:26px" tabindex="0">
+<span>UR-9</span>
+<div class="tip"><b>UR-9</b><p>Sede regional descentralizada de fiscalização e atendimento.</p><div class="meta"><strong>Diretor(a): </strong>Mauro Guimarães Coam</div></div>
+</div>
+<div class="org-node regional" data-id="urA4" style="left:1110px;top:973px;width:70px;height:26px" tabindex="0">
+<span>UR-10</span>
+<div class="tip"><b>UR-10</b><p>Sede regional descentralizada de fiscalização e atendimento.</p><div class="meta"><strong>Diretor(a): </strong>Paulo Cesar Silva Alvarenga</div></div>
+</div>
+<div class="org-node regional" data-id="urA5" style="left:1110px;top:1005px;width:70px;height:26px" tabindex="0">
+<span>UR-13</span>
+<div class="tip"><b>UR-13</b><p>Sede regional descentralizada de fiscalização e atendimento.</p><div class="meta"><strong>Diretor(a): </strong>Marcelo Zaccaro</div></div>
+</div>
+<div class="org-node regional" data-id="urA6" style="left:1110px;top:1037px;width:70px;height:26px" tabindex="0">
+<span>UR-15</span>
+<div class="tip"><b>UR-15</b><p>Sede regional descentralizada de fiscalização e atendimento.</p><div class="meta"><strong>Diretor(a): </strong>Thaís Albani dos Santos</div></div>
+</div>
+<div class="org-node regional" data-id="urA7" style="left:1110px;top:1069px;width:70px;height:26px" tabindex="0">
+<span>UR-16</span>
+<div class="tip"><b>UR-16</b><p>Sede regional descentralizada de fiscalização e atendimento.</p><div class="meta"><strong>Diretor(a): </strong>Camila Simão Costa</div></div>
+</div>
+<div class="org-node regional" data-id="urA8" style="left:1110px;top:1101px;width:70px;height:26px" tabindex="0">
+<span>UR-17</span>
+<div class="tip"><b>UR-17</b><p>Sede regional descentralizada de fiscalização e atendimento.</p><div class="meta"><strong>Diretor(a): </strong>Rodrigo Marques Rodrigues</div></div>
+</div>
+<div class="org-node regional" data-id="urA9" style="left:1110px;top:1133px;width:70px;height:26px" tabindex="0">
+<span>UR-20</span>
+<div class="tip"><b>UR-20</b><p>Sede regional descentralizada de fiscalização e atendimento.</p><div class="meta"><strong>Diretor(a): </strong>Rafael Ribeiro Calegari Gomes</div></div>
+</div>
+<div class="org-node fiscalSmall df-low" data-id="df20" style="left:1060px;top:1248px;width:82px;height:27px" tabindex="0">
+<span>DF-2</span>
+<div class="tip"><b>DF-2</b><p>Fiscaliza contas, atos e gestão dos jurisdicionados de sua área.</p><div class="meta"><strong>Diretor(a): </strong>Cláudio Balmant</div></div>
+</div>
+<div class="org-node fiscalSmall df-low" data-id="df21" style="left:1060px;top:1281px;width:82px;height:27px" tabindex="0">
+<span>DF-2.1</span>
+<div class="tip"><b>DF-2.1</b><p>Subunidade operacional da respectiva Diretoria de Fiscalização.</p></div>
+</div>
+<div class="org-node fiscalSmall df-low" data-id="df22" style="left:1060px;top:1314px;width:82px;height:27px" tabindex="0">
+<span>DF-2.2</span>
+<div class="tip"><b>DF-2.2</b><p>Subunidade operacional da respectiva Diretoria de Fiscalização.</p></div>
+</div>
+<div class="org-node fiscalSmall df-low" data-id="df23" style="left:1060px;top:1347px;width:82px;height:27px" tabindex="0">
+<span>DF-2.3</span>
+<div class="tip"><b>DF-2.3</b><p>Subunidade operacional da respectiva Diretoria de Fiscalização.</p></div>
+</div>
+<div class="org-node fiscalSmall df-low" data-id="df24" style="left:1060px;top:1380px;width:82px;height:27px" tabindex="0">
+<span>DF-2.4</span>
+<div class="tip"><b>DF-2.4</b><p>Subunidade operacional da respectiva Diretoria de Fiscalização.</p></div>
+</div>
+<div class="org-node fiscalSmall df-low" data-id="df50" style="left:1160px;top:1248px;width:82px;height:27px" tabindex="0">
+<span>DF-5</span>
+<div class="tip"><b>DF-5</b><p>Fiscaliza contas, atos e gestão dos jurisdicionados de sua área.</p><div class="meta"><strong>Diretor(a): </strong>Honormélio Pereira da Silveira</div></div>
+</div>
+<div class="org-node fiscalSmall df-low" data-id="df51" style="left:1160px;top:1281px;width:82px;height:27px" tabindex="0">
+<span>DF-5.1</span>
+<div class="tip"><b>DF-5.1</b><p>Subunidade operacional da respectiva Diretoria de Fiscalização.</p></div>
+</div>
+<div class="org-node fiscalSmall df-low" data-id="df52" style="left:1160px;top:1314px;width:82px;height:27px" tabindex="0">
+<span>DF-5.2</span>
+<div class="tip"><b>DF-5.2</b><p>Subunidade operacional da respectiva Diretoria de Fiscalização.</p></div>
+</div>
+<div class="org-node fiscalSmall df-low" data-id="df53" style="left:1160px;top:1347px;width:82px;height:27px" tabindex="0">
+<span>DF-5.3</span>
+<div class="tip"><b>DF-5.3</b><p>Subunidade operacional da respectiva Diretoria de Fiscalização.</p></div>
+</div>
+<div class="org-node fiscalSmall df-low" data-id="df54" style="left:1160px;top:1380px;width:82px;height:27px" tabindex="0">
+<div class="ti
