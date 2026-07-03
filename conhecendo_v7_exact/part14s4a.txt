@@ -1,6 +1,0 @@
->Diretor(a): </strong>Robson Luis Correia</div></div>
-</div>
-<div class="org-node regional" data-id="urB9" style="left:1510px;top:1133px;width:70px;height:26px" tabindex="0">
-<span>UR-19</span>
-<div class="tip"><b>UR-19</b><p>Sede regional descentralizada de fiscaliza&ccedil;&atilde;o e atendimento.</p><div class="meta"><strong>Diretor(a): </strong>Vanderlei Marçola</div></div>
-</div>

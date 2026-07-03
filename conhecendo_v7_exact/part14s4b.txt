@@ -1,9 +1,0 @@
-<div class="org-node fiscalSmall df-low" data-id="df10" style="left:1580px;top:1248px;width:82px;height:27px" tabindex="0">
-<span>DF-1</span>
-<div class="tip"><b>DF-1</b><p>Fiscaliza contas, atos e gestão dos jurisdicionados de sua área.</p><div class="meta"><strong>Diretor(a): </strong>Gabriel Marchi da Silva</div></div>
-</div>
-<div class="org-node fiscalSmall df-low" data-id="df11" style="left:1580px;top:1281px;width:82px;height:27px" tabindex="0">
-<span>DF-1.1</span>
-<div class="tip"><b>DF-1.1</b><p>Subunidade operacional da respectiva Diretoria de Fiscalização.</p></div>
-</div>
-<div class="org-node fiscalSmall df-l
