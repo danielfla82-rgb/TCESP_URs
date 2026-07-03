@@ -1,0 +1,17 @@
+"tip"><b>Coordenadoria de
+Fiscaliza&ccedil;&atilde;o e Controle
+dos Regimes Pr&oacute;prios
+de Previd&ecirc;ncia &ndash;
+COFISCO</b><p>Coordena fiscaliza&ccedil;&atilde;o e controle de regimes pr&oacute;prios de previd&ecirc;ncia.</p></div>
+</div>
+<div class="org-node regional" data-id="urB0" style="left:1510px;top:845px;width:70px;height:26px" tabindex="0">
+<span>UR-2</span>
+<div class="tip"><b>UR-2</b><p>Sede regional descentralizada de fiscaliza&ccedil;&atilde;o e atendimento.</p><div class="meta"><strong>Diretor(a): </strong>Luciano Teixeira Savioli</div></div>
+</div>
+<div class="org-node regional" data-id="urB1" style="left:1510px;top:877px;width:70px;height:26px" tabindex="0">
+<span>UR-4</span>
+<div class="tip"><b>UR-4</b><p>Sede regional descentralizada de fiscaliza&ccedil;&atilde;o e atendimento.</p><div class="meta"><strong>Diretor(a): </strong>Agnon Ribeiro de Lima</div></div>
+</div>
+<div class="org-node regional" data-id="urB2" style="left:1510px;top:909px;width:70px;height:26px" tabindex="0">
+<span>UR-5</span>
+<div class="tip"><b>UR-5</b><p>Sede regional desce
