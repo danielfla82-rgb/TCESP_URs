@@ -1,0 +1,115 @@
+RES</span>
+<div class="tip"><b>CONSELHEIROS
+SUBSTITUTOS -
+AUDITORES</b><p>Estrutura de apoio aos Conselheiros Substitutos-Auditores.</p></div>
+</div>
+<div class="org-node small" data-id="cartaud" style="left:1235px;top:290px;width:82px;height:28px" tabindex="0">
+<span>Cartório</span>
+<div class="tip"><b>Cartório</b><p>Organiza registros, atos e expedientes processuais.</p></div>
+</div>
+<div class="org-node judicial" data-id="gabR1" style="left:1370px;top:150px;width:112px;height:48px" tabindex="0">
+<span>GABINETE DE
+CONSELHEIRO</span>
+<div class="tip"><b>GABINETE DE
+CONSELHEIRO</b><p>Assessora o Conselheiro na análise e condução de processos.</p></div>
+</div>
+<div class="org-node small" data-id="cartR1" style="left:1390px;top:285px;width:72px;height:26px" tabindex="0">
+<span>Cartório</span>
+<div class="tip"><b>Cartório</b><p>Organiza registros, atos e expedientes processuais.</p></div>
+</div>
+<div class="org-node judicial" data-id="gabR2" style="left:1510px;top:150px;width:112px;height:48px" tabindex="0">
+<span>GABINETE DE
+CONSELHEIRO</span>
+<div class="tip"><b>GABINETE DE
+CONSELHEIRO</b><p>Assessora o Conselheiro na análise e condução de processos.</p></div>
+</div>
+<div class="org-node small" data-id="cartR2" style="left:1530px;top:285px;width:72px;height:26px" tabindex="0">
+<span>Cartório</span>
+<div class="tip"><b>Cartório</b><p>Organiza registros, atos e expedientes processuais.</p></div>
+</div>
+<div class="org-node judicial" data-id="gabR3" style="left:1650px;top:150px;width:112px;height:48px" tabindex="0">
+<span>GABINETE DE
+CONSELHEIRO</span>
+<div class="tip"><b>GABINETE DE
+CONSELHEIRO</b><p>Assessora o Conselheiro na análise e condução de processos.</p></div>
+</div>
+<div class="org-node small" data-id="cartR3" style="left:1670px;top:285px;width:72px;height:26px" tabindex="0">
+<span>Cartório</span>
+<div class="tip"><b>Cartório</b><p>Organiza registros, atos e expedientes processuais.</p></div>
+</div>
+<div class="org-node external" data-id="pfe" style="left:1730px;top:210px;width:94px;height:58px" tabindex="0">
+<span>PFE
+Procuradoria
+da Fazenda</span>
+<div class="tip"><b>PFE
+Procuradoria
+da Fazenda</b><p>Representação jurídica da Fazenda Pública junto ao Tribunal.</p></div>
+</div>
+<div class="org-node admin" data-id="dga" style="left:70px;top:360px;width:120px;height:70px" tabindex="0">
+<span>DGA
+Depto. Geral da
+Administração</span>
+<div class="tip"><b>DGA
+Depto. Geral da
+Administração</b><p>Coordena pessoal, finanças, materiais, serviços e apoio administrativo.</p></div>
+</div>
+<div class="org-node admin" data-id="gtp" style="left:235px;top:360px;width:110px;height:70px" tabindex="0">
+<span>GTP
+Gab. Técnico
+da Presidência</span>
+<div class="tip"><b>GTP
+Gab. Técnico
+da Presidência</b><p>Presta apoio técnico à Presidência.</p></div>
+</div>
+<div class="org-node tech" data-id="dti" style="left:430px;top:360px;width:120px;height:70px" tabindex="0">
+<span>DTI
+Depto.Tecno.
+Informação</span>
+<div class="tip"><b>DTI
+Depto.Tecno.
+Informação</b><p>Coordena tecnologia, sistemas, infraestrutura e segurança da informação.</p></div>
+</div>
+<div class="org-node admin" data-id="dirproc" style="left:685px;top:370px;width:110px;height:58px" tabindex="0">
+<span>Diretoria de
+Gerenciamento de
+Processos</span>
+<div class="tip"><b>Diretoria de
+Gerenciamento de
+Processos</b><p>Apoia gestão de processos, cadastros, acesso e atendimento técnico.</p></div>
+</div>
+<div class="org-node admin" data-id="dircom" style="left:825px;top:370px;width:110px;height:58px" tabindex="0">
+<span>Diretoria de
+Comunicação
+Institucional</span>
+<div class="tip"><b>Diretoria de
+Comunicação
+Institucional</b><p>Coordena comunicação institucional, imprensa, conteúdo e identidade visual.</p></div>
+</div>
+<div class="org-node admin" data-id="revista" style="left:950px;top:390px;width:82px;height:42px" tabindex="0">
+<span>Revista do
+TCESP</span>
+<div class="tip"><b>Revista do
+TCESP</b><p>Produz conteúdo editorial e publicações institucionais.</p></div>
+</div>
+<div class="org-node admin" data-id="dce" style="left:1065px;top:370px;width:105px;height:58px" tabindex="0">
+<span>Diretoria de
+Coordenação
+Estratégica</span>
+<div class="tip"><b>Diretoria de
+Coordenação
+Estratégica</b><p>Apoia planejamento, coordenação estratégica e monitoramento.</p></div>
+</div>
+<div class="org-node admin" data-id="direxppres" style="left:1185px;top:370px;width:105px;height:58px" tabindex="0">
+<span>Diretoria de
+Expediente da
+Presidência</span>
+<div class="tip"><b>Diretoria de
+Expediente da
+Presidência</b><p>Organiza protocolo, expediente e tramitação administrativa.</p></div>
+</div>
+<div class="org-node admin" data-id="ouvid" style="left:1315px;top:380px;width:95px;height:46px" tabindex="0">
+<span>Ouvidoria</span>
+<div class="tip"><b>Ouvidoria</b><p>Recebe manifestações do cidadão e encaminha demandas ao Tribunal.</p></div>
+</div>
+<div class="org-node admin" data-id="control" style="left:1455px;top:380px;width:105px;height:46px" tabindex="0">
+<div class
